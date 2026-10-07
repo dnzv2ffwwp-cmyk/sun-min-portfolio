@@ -1,0 +1,618 @@
+.brand-story {
+  --bs-page-gutter: 3rem;
+  --bs-page-max: 114rem;
+  --bs-section-max: 120rem;
+
+  width: 100%;
+  overflow: hidden;
+
+  color: var(--mellowee-black-800);
+  font-family: var(--font-pc, "Pretendard", sans-serif);
+}
+
+.brand-story *,
+.brand-story *::before,
+.brand-story *::after {
+  box-sizing: border-box;
+}
+
+.brand-story h1,
+.brand-story h2,
+.brand-story h3,
+.brand-story p,
+.brand-story figure,
+.brand-story ul,
+.brand-story ol {
+  margin: 0;
+}
+
+.brand-story h2,
+.brand-story h3,
+.brand-story p {
+  font-family: var(--font-pc, "Pretendard", sans-serif);
+}
+
+.brand-story ul,
+.brand-story ol {
+  padding: 0;
+  list-style: none;
+}
+
+.brand-story img {
+  display: block;
+  max-width: 100%;
+}
+
+.brand-story .page-shell {
+  width: calc(100% - (var(--bs-page-gutter) * 2));
+  max-width: var(--bs-page-max);
+  margin-inline: auto;
+}
+
+.brand-story .section-shell {
+  width: 100%;
+  max-width: var(--bs-section-max);
+  margin-inline: auto;
+}
+
+.brand-story .story-heading {
+  display: flex;
+  min-height: 16.375rem;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 2rem;
+  padding-inline: var(--bs-page-gutter);
+
+  text-align: center;
+}
+
+.brand-story .story-heading h1 {
+  color: var(--mellowee-main-green);
+
+  font-family:
+    var(--font-point, "Mabook"),
+    var(--font-pc, "Pretendard"),
+    sans-serif;
+
+  font-size: 4rem;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.brand-story .story-heading p {
+  color: var(--mellowee-black-800);
+
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.brand-story .hero-media {
+  width: calc(100% - (var(--bs-page-gutter) * 2));
+  max-width: var(--bs-page-max);
+
+  aspect-ratio: 1824 / 800;
+
+  margin: 3rem auto;
+
+  overflow: hidden;
+}
+
+.brand-story .hero-media > img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.brand-story .our-story {
+  display: grid;
+
+  grid-template-columns:
+    25fr
+    25fr
+    25fr
+    36fr;
+
+  gap: 1rem;
+  align-items: center;
+
+  padding-block: 3rem;
+}
+
+.brand-story .our-story > * {
+  min-width: 0;
+}
+
+.brand-story .story-photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+
+  overflow: hidden;
+}
+
+.brand-story .story-photo > img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.brand-story .story-copy {
+  display: flex;
+
+  width: 100%;
+  max-width: 36rem;
+  min-height: 13.6875rem;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 1rem;
+
+  justify-self: center;
+
+  padding: 3rem;
+
+  text-align: center;
+}
+
+.brand-story .story-copy h2 {
+  color: var(--mellowee-black-800);
+
+  font-size: 2.4375rem;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.brand-story .story-copy p {
+  color: var(--mellowee-black-800);
+
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.brand-story .section-title {
+  text-align: center;
+}
+
+.brand-story .section-title h2,
+.brand-story .logo-title h2 {
+  color: var(--mellowee-black-800);
+
+  font-size: 2.4375rem;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.brand-story .section-title p {
+  margin-top: 1rem;
+
+  color: var(--mellowee-black-800);
+
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.brand-story .principles {
+  display: flex;
+  min-height: 165.875rem;
+
+  flex-direction: column;
+
+  padding: 3rem;
+}
+
+.brand-story .logo-title {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 1.125rem;
+}
+
+.brand-story .principles-logo {
+  width: auto;
+  height: 2.375rem;
+
+  flex: 0 0 auto;
+}
+
+.brand-story .principle-list {
+  display: grid;
+
+  grid-template-columns: minmax(0, 31.25rem);
+
+  justify-content: center;
+
+  gap: 4.5rem;
+
+  margin-top: 4.5rem;
+}
+
+.brand-story .principle-card {
+  width: 100%;
+
+  text-align: center;
+}
+
+.brand-story .principle-card > img {
+  width: 100%;
+  aspect-ratio: 25 / 33;
+
+  object-fit: cover;
+}
+
+.brand-story .principle-card h3 {
+  margin-top: 2.875rem;
+
+  color: var(--mellowee-main-green);
+
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.brand-story .principle-index {
+  color: inherit;
+  font-weight: inherit;
+}
+
+.brand-story .principle-card p {
+  margin-top: 1rem;
+
+  color: var(--mellowee-black-800);
+
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.brand-story .philosophy {
+  min-height: 68.125rem;
+
+  padding: 3rem;
+}
+
+.brand-story .philosophy-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 31.25rem));
+
+  justify-content: center;
+
+  gap: 3rem;
+
+  margin-top: 3rem;
+}
+
+.brand-story .philosophy-card {
+  min-width: 0;
+
+  text-align: center;
+}
+
+.brand-story .philosophy-card > img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+
+  object-fit: cover;
+}
+
+.brand-story .philosophy-pill {
+  display: flex;
+
+  width: max-content;
+  max-width: 100%;
+  min-height: 5.75rem;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 1rem;
+
+  margin: 3rem auto 0;
+  padding: 1rem;
+
+  border-radius: 62.5rem;
+
+  background:
+    var(
+      --mellowee-pink-200,
+      var(--mellowee-pink-100)
+    );
+}
+
+.brand-story .philosophy-pill h3,
+.brand-story .philosophy-pill p {
+  color: var(--mellowee-black-800);
+
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+
+  white-space: nowrap;
+}
+
+.brand-story .everyday {
+  min-height: 69.9375rem;
+
+  padding: 3rem 0;
+}
+
+.brand-story .everyday .section-title {
+  padding-inline: var(--bs-page-gutter);
+}
+
+.brand-story .everyday-media {
+  aspect-ratio: 1824 / 842;
+
+  margin-top: 6rem;
+
+  overflow: hidden;
+}
+
+.brand-story .everyday-media > img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+@media (max-width: 80rem) {
+
+  .brand-story {
+    --bs-page-gutter: 2rem;
+  }
+
+  .brand-story .story-heading {
+    min-height: auto;
+
+    padding: 5rem 2rem;
+  }
+
+  .brand-story .story-heading h1 {
+    font-size: clamp(
+      2.75rem,
+      5vw,
+      4rem
+    );
+  }
+
+  .brand-story .story-heading p {
+    font-size: 1.125rem;
+  }
+
+  .brand-story .hero-media {
+    margin-block: 2rem;
+  }
+
+  .brand-story .our-story {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    padding-block: 2rem;
+  }
+
+  .brand-story .story-copy {
+    grid-column: 1 / -1;
+
+    max-width: 44rem;
+    min-height: auto;
+
+    padding: 2rem 1.5rem 0;
+  }
+
+  .brand-story .principles {
+    min-height: auto;
+
+    padding: 6rem 2rem;
+  }
+
+  .brand-story .principle-list {
+    grid-template-columns:
+      minmax(
+        0,
+        min(70vw, 31.25rem)
+      );
+  }
+
+  .brand-story .philosophy {
+    min-height: auto;
+
+    padding: 6rem 2rem;
+  }
+
+  .brand-story .philosophy-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap: 2rem;
+  }
+
+  .brand-story .philosophy-pill {
+    width: 100%;
+
+    padding-inline: 0.75rem;
+  }
+
+  .brand-story .philosophy-pill h3,
+  .brand-story .philosophy-pill p {
+    white-space: normal;
+  }
+
+
+  .brand-story .everyday {
+    min-height: auto;
+
+    padding-top: 6rem;
+  }
+
+  .brand-story .everyday-media {
+    margin-top: 4rem;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 48rem) {
+
+  .brand-story {
+    --bs-page-gutter: 1rem;
+  }
+
+  .brand-story .story-heading {
+    gap: 1.5rem;
+
+    padding: 3rem 1rem;
+  }
+
+  .brand-story .story-heading h1 {
+    font-size: 2.5rem;
+  }
+
+  .brand-story .story-heading p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .brand-story .story-heading p br {
+    display: none;
+  }
+
+  .brand-story .hero-media {
+    aspect-ratio: 16 / 10;
+
+    margin-block: 1rem;
+  }
+
+  .brand-story .our-story {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap: 0.5rem;
+
+    padding-block: 1rem;
+  }
+
+  .brand-story .story-photo {
+    aspect-ratio: 3 / 4;
+  }
+
+  .brand-story .story-copy {
+    grid-column: 1 / -1;
+
+    min-height: auto;
+
+    padding: 2.25rem 0.625rem 0;
+  }
+
+  .brand-story .story-copy h2,
+  .brand-story .section-title h2,
+  .brand-story .logo-title h2 {
+    font-size: 2rem;
+  }
+
+  .brand-story .story-copy p,
+  .brand-story .section-title p {
+    font-size: 0.875rem;
+  }
+
+  .brand-story .principles {
+    padding: 5.5rem 1rem;
+  }
+
+  .brand-story .logo-title {
+    flex-direction: column;
+
+    gap: 0.625rem;
+  }
+
+  .brand-story .principles-logo {
+    height: 2rem;
+  }
+
+  .brand-story .principle-list {
+    grid-template-columns:
+      minmax(
+        0,
+        min(78vw, 31.25rem)
+      );
+
+    gap: 4.5rem;
+
+    margin-top: 3.375rem;
+  }
+
+  .brand-story .principle-card h3 {
+    margin-top: 1.5rem;
+
+    font-size: 0.875rem;
+  }
+
+  .brand-story .principle-card p {
+    margin-top: 0.625rem;
+
+    font-size: 0.8125rem;
+  }
+
+  .brand-story .philosophy {
+    padding: 5.5rem 1rem;
+  }
+
+  .brand-story .philosophy-grid {
+    grid-template-columns: 1fr;
+
+    gap: 4rem;
+
+    margin-top: 3.25rem;
+  }
+
+  .brand-story .philosophy-card {
+    width:
+      min(
+        82vw,
+        31.25rem
+      );
+
+    margin-inline: auto;
+  }
+
+  .brand-story .philosophy-pill {
+    width: max-content;
+    max-width: 100%;
+    min-height: 5.25rem;
+
+    gap: 0.75rem;
+
+    margin-top: 1.5rem;
+  }
+
+  .brand-story .philosophy-pill h3,
+  .brand-story .philosophy-pill p {
+    font-size: 0.875rem;
+  }
+
+  .brand-story .everyday {
+    padding: 5.5rem 0 4rem;
+  }
+
+  .brand-story .everyday-media {
+    aspect-ratio: 4 / 3;
+
+    margin-top: 3rem;
+  }
+}

@@ -1,0 +1,220 @@
+/* recently viewed */
+.account-layout {
+  display: grid;
+  max-width: 102.5rem;
+  grid-template-columns: 13.75rem 1fr;
+  gap: 5rem;
+  margin: 0 auto;
+  padding: 0 2.5rem 8.125rem;
+}
+.recent-item__content > h2 {margin-bottom: .5rem; font-size:var(--fs-h4); font-weight: var( --fw-bold); }
+.account-sidebar{ padding-left: 1rem; padding-right: 1rem;}
+.account-sidebar h2 { margin: 0 0 1rem; font-size: var(--fs-body1); font-weight: var( --fw-bold); }
+.account-sidebar h3 { margin: 3rem 0 1rem; font-size: var(--fs-body1); font-weight: var( --fw-bold); }
+.account-sidebar a { display: block; margin: 0 0 1rem; color: var(--mellowee-black-600); font-size: var(--fs-body2); }
+.account-sidebar a.is-active { color: var(--mellowee-black-900); font-weight: var(--fw-bold); }
+.account-sidebar .ghost-button { margin-top: 1rem; }
+
+.recent-list > h1 {
+  margin: 0;
+  padding-bottom: 1rem;
+  border-bottom: 0.125rem solid var(--mellowee-black-900);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+}
+
+.recent-item {
+  display: grid;
+  grid-template-columns: 13rem 1fr;
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+/* content wrapper restored to original flow */
+.recent-item__content { position: relative; }
+
+
+.recent-item__price ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recent-item__price li { list-style: none; }
+.recent-item__price del { display: block; color: var(--mellowee-black-400); }
+.recent-item__price strong { font-size: var(--fs-body1); }
+.recent-item__point { margin: 0.5rem 0; color: var(--mellowee-black-400); font-size: var(--fs-body1); }
+.recent-item__point img.icon-won { width: 1em; height: 1em; display: inline-block; margin-right: 0.25rem; vertical-align: middle; }
+.recent-item__point span { vertical-align: middle; }
+
+.recent-delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--mellowee-black-400);
+  /* 닫기 버튼 사이즈 조절 해야함 */
+  font-size: 1.75rem;
+
+}
+
+.recent-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin: 0.5rem 0 0.5rem;
+  padding-right: 1.125rem;
+}
+
+.recent-actions .primary-button,
+.recent-actions .secondary-button { min-width: 8.5rem; }
+
+.recent-options {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--mellowee-black-050);
+  align-items: center;
+  border-radius: 2px;
+}
+
+.recent-options label {
+  align-self: center;
+  color: var(--mellowee-black-600);
+  font-size: var(--fs-body2);
+  padding-left: 0.25rem;
+}
+
+.recent-options select {
+  width: 100%;
+  box-sizing: border-box;
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  border: 0.0625rem solid var(--mellowee-black-200);
+  background: var(--mellowee-black-000);
+  border-radius: 2px;
+}
+.recent-empty { padding: 5.625rem 0; color: var(--mellowee-black-500); text-align: center; }
+
+/* Responsive: tablet (pad) */
+@media (max-width: 1024px) {
+  .recent-list > h1 { font-size: var(--fs-h4); padding-bottom: 1rem; }
+  .account-layout { grid-template-columns: 11.25rem 1fr; gap: 2.5rem; }
+
+  .recent-page { width: calc(100% - 6rem); max-width: none; padding-top: 6.25rem; }
+
+  /* tablet: slightly smaller image column and readable spacing */
+  .recent-item { grid-template-columns: 11.25rem 1fr; column-gap: 2.25rem; }
+  .recent-item__image { width: 11.25rem; height: 11.25rem; }
+
+  .recent-item__content h2 { font-size: var(--fs-h4); font-weight: var(--fw-bold);}
+  .recent-item__price, .recent-item__price li, .recent-item__point { font-size: var(--fs-body1); }
+  .recent-actions { padding-right: 1.125rem; }
+  .recent-item__price ul {gap: 0.25rem;}
+
+  /* Pad: constrain action button height and font-size */
+  .recent-actions {
+    gap: 0.75rem;
+  }
+  .recent-actions .primary-button,
+  .recent-actions .secondary-button {
+    height: 2.75rem; /* 44px */
+    max-height: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0 0.75rem;
+    font-size: 0.6875rem; /* ~var(--fs-body2) = 11px */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+    .recent-item__content{
+      position:relative;
+      min-width:0;
+  }
+
+    /* 옵션 영역 */
+
+  .recent-options{
+      grid-column:1 / -1;
+
+      width:100%;
+
+      display:grid;
+      grid-template-columns:5.5rem 1fr;
+
+      align-items:center;
+
+      margin-top:1rem;
+
+      padding:0.25rem 1.25rem;
+
+      background:var(--mellowee-black-100);
+
+      box-sizing:border-box;
+  }
+    /* select */
+  .recent-options select{
+      width:100%;
+      height:2rem;
+
+      padding:0 1rem;
+
+      border:1px solid var(--mellowee-black-100);
+      background: var(--mellowee-black-000);
+
+      font-size:var(--fs-detail);
+      color:var(--mellowee-black-800);
+
+      box-sizing:border-box;
+  }
+   /* 1024px 이하에서는 사이드바 숨김 */
+  .account-sidebar {
+    display: none;
+  }
+
+  /* 사이드바가 없어졌으므로 콘텐츠를 1열로 */
+  .account-layout { 
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+/* Responsive: mobile */
+@media (max-width: 402px) {
+  .recent-list > h1 { text-align: center; font-size: var(--fs-h4); padding-bottom: 0.75rem; }
+
+  .account-layout { grid-template-columns: 1fr; padding: 2.8125rem 1rem 5rem; }
+  .account-sidebar { display: none; }
+
+  .recent-item { grid-template-columns: 6.875rem 1fr; gap: 1rem; align-items: start; }
+  .recent-item__image { width: 6.875rem; height: 6.875rem; }
+
+  .recent-item__content h2 { font-size: var(--fs-h4); padding-right: 0; }
+  .recent-item__price, .recent-item__price li, .recent-item__point { font-size: var(--fs-body1); }
+
+  .recent-actions { justify-content: stretch; }
+  .recent-actions .primary-button, .recent-actions .secondary-button { min-width: 0; flex: 1; padding: 0 0.5rem; }
+  /* Mobile: smaller action button height and font-size */
+  .recent-actions .primary-button,
+  .recent-actions .secondary-button {
+    height: 2.125rem; /* 34px */
+    max-height: 2.125rem;
+    min-height: 2.125rem;
+    font-size: 0.6875rem; /* ~var(--fs-body2) = 11px */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .recent-options { grid-template-columns: 3.75rem 1fr; padding: 0.75rem; font-size: var(--fs-body1); }
+}

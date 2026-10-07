@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="멜로위 베이비 키즈웨어 상품 목록" />
+  <title>BABY COLLECTION | MELLOWEE</title>
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/tokens.css" />
+  <link rel="stylesheet" href="./css/header.css" />
+  <link rel="stylesheet" href="./css/footer.css" />
+  <link rel="stylesheet" href="./css/styles.css" />
+  <link rel="stylesheet" href="./css/pages.css" />
+  <link rel="stylesheet" href="./css/product-list.css" />
+  <script src="./js/components.js" defer></script>
+  <script src="./js/pages.js" defer></script>
+  <script src="./js/header.js" defer></script>
+  <link rel="stylesheet" href="./css/font.css">
+</head>
+
+<body class="subpage">
+  <div data-site-header></div>
+  
+  <main class="subpage-main">
+    <div class="breadcrumb"><a href="./index.html">홈</a><span>/</span><span>BABY
+        (0-3세)</span><span>/</span><strong>신상품</strong></div>
+    <section class="catalog-hero">
+      <h1 class="page-heading page-heading--sage">BABY(0-3세)</h1>
+      <div class="category-pills" aria-label="상품 카테고리">
+        <button type="button" data-category="all">전체</button>
+        <button type="button" data-category="newborn">신생아</button>
+        <button type="button" data-category="baby">베이비</button>
+        <button type="button" data-category="kids">키즈</button>
+        <button type="button" data-category="junior">주니어</button>
+        <button type="button" data-category="acc">ACC</button>
+        <button type="button" data-category="gift">선물세트</button>
+      </div>
+    </section>
+    <section class="catalog-section">
+      <div class="catalog-toolbar"><span data-product-count></span><label>정렬 <select data-sort>
+            <option value="new">신상품순</option>
+            <option value="low">낮은 가격순</option>
+            <option value="high">높은 가격순</option>
+          </select></label></div>
+      <div class="catalog-grid" data-product-list></div>
+      <div class="best-heading">
+        <h2>Best Item</h2>
+        <p>가장 많이 사랑 받은 아이템</p>
+      </div>
+      <div class="catalog-grid catalog-grid--best" data-best-list></div>
+    </section>
+  </main>
+  <div data-site-footer></div>
+</body>
+
+</html>

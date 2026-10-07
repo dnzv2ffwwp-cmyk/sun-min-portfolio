@@ -1,0 +1,252 @@
+@charset "UTF-8";
+
+/* footer수정 2026.09.01 */
+/* 추가된 스타일 */
+.site-footer {
+  padding: 3rem 0 0;
+  color: #666;
+  background: #f5f5f5;
+}
+.mo {display: none;}
+
+.footer-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 0 3rem;
+}
+.footer-main.page-shell.fwidth-shell,
+.payment.page-shell.fwidth-shell {
+  width: min(100%, 120rem);
+  margin-inline: auto;
+}
+
+.footer-brand {
+  flex: 1;
+  min-width: 0;
+}
+
+.flogo {
+  width: 100%;
+  padding-left: 3rem;
+}
+
+.flogo img {
+  width: 12.5rem;
+  margin-bottom: 1rem;
+}
+
+.info1,
+.info2 {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-brand .info1 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.footer-brand .info2 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.footer-brand > strong {
+  display: block;
+  margin-bottom: 22px;
+  color: var(--mellowee-primary-500, #a1b889);
+  font-family: Georgia, serif;
+  font-size: var(--fs-h4);
+  letter-spacing: 0.04em;
+}
+
+.footer-brand p,
+.customer-center p,
+.payment p {
+  margin: 0.25rem 0;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: 0.7fr 0.7fr 0.9fr 2fr;
+  gap: 1.75rem;
+}
+
+.footer-links > div {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-links strong {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+}
+
+.customer-center strong {
+  color: #121212;
+  font-size: 31px;
+}
+
+.payment {
+  padding: 2rem 3rem;
+}
+
+.payment strong {
+  color: #4c4c4c;
+}
+
+.payment a {
+  display: inline-block;
+  color: #4c4c4c;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.copyright {
+  margin: 0;
+  padding: 18px 48px;
+  background: #fff;
+  text-align: center;
+}
+
+.bold-line {
+  text-decoration: underline;
+  font-weight: var(--fw-bold);
+}
+@media (max-width: 1290px){
+  footer {
+    font-size: var(--fs-pad);
+  }
+}
+
+@media (max-width: 1140px) {
+  .footer-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .flogo {
+    padding-left: 1rem;
+  }
+
+  .footer-links {
+    gap: 0.5rem;
+  }
+
+  .payment,
+  .copyright {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+}
+
+@media (max-width: 970px) {
+  .site-footer.pc-pad {
+    display: none;
+  }
+
+  .site-footer.mo {
+    display: block;
+    width: 100%;
+    padding: 1rem;    
+  }
+
+  .site-footer.mo .flogo {
+    padding: 0;
+  }
+
+  .site-footer.mo .flogo img {
+    width: 160px;
+    height: auto;
+    margin-bottom: 1rem;    
+  }
+
+  .site-footer.mo .footer-main {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0 0 2rem;    
+  }
+
+  .site-footer.mo .info1 {
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .site-footer.mo .info2 {
+    gap: 0;
+  }
+
+  .site-footer.mo .business-check {
+    text-decoration: underline;
+  }
+
+  .site-footer.mo .footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--mellowee-black-100);
+    border-bottom: 1px solid var(--mellowee-black-100);
+  }
+
+  .site-footer.mo .footer-links > div {
+    gap: 0.5rem;
+    min-width: 0;    
+  }
+
+  .site-footer.mo .footer-links strong {
+    margin-bottom: 0.5rem;
+    line-height: 1rem;    
+  }
+
+  .site-footer.mo .footer-links a {
+  }
+
+  .site-footer.mo .customer-center {
+    padding: 2rem;
+    border-bottom: 1px solid var(--mellowee-black-100);
+    text-align: center;    
+  }
+
+  .site-footer.mo .customer-center strong {
+    display: block;
+    margin-bottom: 0.5rem;    
+  }
+
+  .site-footer.mo .customer-center p {
+    margin: 0;    
+  }
+
+  .site-footer.mo .customer-center p + p {
+    margin-top: 0.5rem;
+  }
+
+  .site-footer.mo .payment {
+    width: 100%;
+    margin: 0;
+    padding: 2rem 0 0;    
+  }
+
+  .site-footer.mo .payment p {
+    margin: 0;
+  }
+
+  .site-footer.mo .copyright {
+    padding: 2rem 0 0;
+    background: transparent;
+  }
+}

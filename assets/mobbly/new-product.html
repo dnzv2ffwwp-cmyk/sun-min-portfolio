@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신상품 상세 | MOBBLY</title>
+    <meta name="description" content="MOBBLY 키즈 가구 신상품 상세 정보">
+    <link rel="icon" href="./img/MOBBLY_favicon_set/favicon.ico">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/produsts.css">
+    <link rel="stylesheet" href="./css/product-page.css">
+    <link rel="stylesheet" href="./css/new-product-detail.css">
+    <script src="./js/include.js" defer></script>
+    <script src="./js/new-products.js" defer></script>
+    <script src="./js/new-product-detail.js" defer></script>
+</head>
+<body>
+    <div id="header-wrap"></div>
+
+    <main class="new-product-detail-page">
+        <nav class="product-breadcrumb common-frame" aria-label="현재 위치">
+            <a href="./index.html">HOME</a><span aria-hidden="true">/</span>
+            <a href="./list.html">NEW</a><span aria-hidden="true">/</span>
+            <span id="breadcrumb-name"></span>
+        </nav>
+
+        <section class="info-product">
+            <div class="common-frame">
+                <div class="product-img">
+                    <figure class="thumbnail-big new-product-image-wrap">
+                        <img id="product-image" src="" alt="">
+                    </figure>
+                    <div class="horizontal-scroll-gallery">
+                        <div class="train-horizontal">
+                            <figure class="is-active new-product-thumb-wrap">
+                                <img id="product-thumbnail" src="" alt="">
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-txt">
+                    <div class="product-name">
+                        <span class="category-badge">NEW</span>
+                        <div class="product-title" id="product-name"></div>
+                        <p class="product-short-desc" id="product-description"></p>
+                    </div>
+                    <div class="pay-frame product-pay">
+                        <div class="pay"><b id="product-price"></b>원</div>
+                    </div>
+
+                    <dl class="benefit str">
+                        <dt>회원혜택</dt>
+                        <dd>
+                            <ul class="benefit-list">
+                                <li><span>MOBBLY Point</span><div class="price-benefit"><b id="product-point"></b>P 적립 예정</div></li>
+                            </ul>
+                        </dd>
+                        <dd></dd>
+                        <dt>추가혜택</dt>
+                        <dd>
+                            <ul class="benefit-list">
+                                <li><span>무이자할부</span><div class="desc-benefit">최대 6개월 무이자 할부</div></li>
+                            </ul>
+                        </dd>
+                        <dd><a href="#delivery-guide" class="btn-link">더보기</a></dd>
+                        <dt>배송정보</dt>
+                        <dd><p class="delivery-info">무료배송 (제주도 제외) / 전문 설치배송</p></dd>
+                        <dd><a href="#delivery-guide" class="btn-link">자세히보기</a></dd>
+                    </dl>
+
+                    <div class="purchase-options">
+                        <label for="product-option">필수 옵션</label>
+                        <select id="product-option">
+                            <option value="">색상을 선택해 주세요</option>
+                            <option value="cream">크림</option>
+                            <option value="natural">내추럴 우드</option>
+                        </select>
+                        <div class="quantity-row">
+                            <span>수량</span>
+                            <div class="quantity-control" aria-label="수량 선택">
+                                <button type="button" class="quantity-minus" aria-label="수량 줄이기">−</button>
+                                <output class="quantity-value">1</output>
+                                <button type="button" class="quantity-plus" aria-label="수량 늘리기">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pay-info">총 합계금액 <b id="total-price"></b>원</div>
+                    <div class="buttons">
+                        <button type="button" class="btn-wish" aria-label="관심 상품에 담기">♡</button>
+                        <button type="button" class="btn-cart">장바구니</button>
+                        <button type="button" class="btn-buy">구매하기</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="product-detail-info">
+            <div class="common-frame">
+                <ul class="sticky-product-menu">
+                    <li><a class="on" href="#product-detail-1">상품정보</a></li>
+                    <li><a href="#delivery-guide">배송안내</a></li>
+                </ul>
+                <div id="product-detail-1" class="new-product-detail-content">
+                    <span>MOBBLY KIDS COLLECTION</span>
+                    <h2 id="detail-name"></h2>
+                    <p id="detail-description"></p>
+                    <img id="detail-image" src="" alt="">
+                </div>
+                <div id="delivery-guide" class="delivery-guide new-delivery-guide">
+                    <h2>배송 안내</h2>
+                    <dl>
+                        <div><dt>배송 방식</dt><dd>가구 전문 기사가 안전하게 배송하고 설치해 드립니다.</dd></div>
+                        <div><dt>배송 지역</dt><dd>전국 배송 가능하며 제주 및 도서산간 지역은 추가 비용이 발생할 수 있습니다.</dd></div>
+                        <div><dt>교환 및 반품</dt><dd>상품 수령 후 7일 이내 고객센터를 통해 접수해 주세요.</dd></div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-wrap"></div>
+</body>
+</html>

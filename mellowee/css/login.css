@@ -1,0 +1,115 @@
+/* login */
+.login-page {
+  display: grid;
+  min-height: 78.125rem;
+  place-items: center;
+  padding: 6rem 1.5rem;
+}
+
+.login-box {
+  width: min(100%, 47.5rem);
+  padding: 3rem 3rem;
+  background: var(--mellowee-beige-050);
+}
+
+.login-box h1 {
+  margin: 0 0 4rem;
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  text-align: center;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  width: 100%;
+  height: 3.875rem;
+  margin-bottom: 0.875rem;
+  padding: 0 1.25rem;
+  border: 0.0625rem solid var(--mellowee-black-200);
+  background: var(--mellowee-black-000);
+  font-size: var(--fs-body1);
+}
+
+.login-options {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin: 0.75rem 0 1.125rem;
+}
+
+.login-options label { font-weight: var(--fw-bold); }
+.login-form .primary-button { width: 100%; font-size: var(--fs-h4); }
+
+.login-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.125rem;
+  margin: 1.125rem 0;
+  font-size: var(--fs-body1);
+}
+
+.login-links a + a { position: relative; }
+.login-links a + a::before { position: absolute; top: 0.125rem; left: -0.625rem; width: 0.0625rem; height: 0.875rem; background: var(--mellowee-black-100); content: ""; }
+
+.join-card {
+  max-width: 26.25rem;
+  margin: 1.125rem auto 1.75rem;
+  padding: 3.625rem 2.25rem;
+  border: 0.0625rem solid var(--mellowee-black-300);
+  background: var(--mellowee-black-000);
+  text-align: center;
+}
+
+.join-card h2 { margin: 0 0 1.125rem; font-size: var(--fs-h3); font-weight: var(--fw-bold); }
+.join-card p { margin: 0 0 2.125rem; color: var(--mellowee-black-500); font-size: var(--fs-body1); line-height: 1.6; }
+
+.sns-title { margin: 1.625rem 0 1.125rem; color: var(--mellowee-black-800); text-align: center; font-size: var(--fs-h4);}
+.sns-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.sns-button { min-height: 3.375rem; border: 0.0625rem solid var(--mellowee-black-300); background: var(--mellowee-black-000); cursor: pointer; font-size: var(--fs-body1); }
+.sns-button b { display: inline-grid; width: 1.625rem; height: 1.625rem; margin-right: 0.625rem; place-items: center; }
+.sns-button .sns-icon { display: inline-block; width: 1em; height: 1em; margin-right: 0.5rem; object-fit: contain; vertical-align: middle; }
+
+/* 버튼 이미지 바꾸기*/
+/* .sns-button--kakao b { border-radius: 0.3125rem; background: #fee500; font-size: var(--fs-h4); }
+.sns-button--naver b { color: var(--mellowee-black-000); background: #03c75a; font-size: var(--fs-h4); } */
+.form-message { min-height: 1.375rem; margin: 0.75rem 0 0; color: var(--mellowee-pink-700); text-align: center; }
+
+/* Pad (tablet) responsive adjustments */
+@media (max-width: 1024px) {
+  .login-page { padding: 6.25rem 1rem; }
+  .login-box { width: min(100%, 36rem); padding: 2.25rem 1.5rem; }
+  
+  .login-box h1 { font-size: var(--fs-h3); }
+  .login-form input[type="text"],
+  .login-form input[type="password"] { font-size: var(--fs-body1); height: 3.5rem; }
+  
+  .login-form .primary-button { font-size: var(--fs-h4); }
+  .login-links { font-size: var(--fs-body1); }
+  .sns-button { font-size: var(--fs-body1); min-height: 3rem; }
+  .join-card h2 { font-size: var(--fs-h3); }
+  .join-card p { font-size: var(--fs-body1); }
+  .sns-title {
+    margin: 1.625rem 0 1.125rem;
+    color: var(--mellowee-black-800);
+    font-size: var(--fs-h4);
+    text-align: center;
+}
+}
+
+
+/* Mobile responsive tweaks: use mobile tokens */
+@media (max-width: 402px) {
+  .login-page { min-height: 56.25rem; padding: 4.375rem 0.875rem; }
+  .login-box { padding: 2.375rem 1.25rem; }
+  .sns-buttons { grid-template-columns: 1fr; }
+
+  .login-box h1 { font-size: var(--fs-h3); }
+  .login-form input[type="text"],
+  .login-form input[type="password"] { font-size: var(--fs-body1); height: 2.75rem; }
+
+  .login-form .primary-button { font-size: var(--fs-h4); }
+  .login-links { font-size: var(--fs-body1); }
+  .sns-button { font-size: var(--fs-body1); min-height: 2.75rem; }
+  .join-card h2 { font-size: var(--fs-h3); }
+  .join-card p { font-size: var(--fs-body1); }
+}

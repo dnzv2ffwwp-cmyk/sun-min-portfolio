@@ -1,0 +1,9 @@
+.hero-banner{
+    line-height: 0;
+}
+/* 패드 화면: 상품 목록을 3열로 표시 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .new-products {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
