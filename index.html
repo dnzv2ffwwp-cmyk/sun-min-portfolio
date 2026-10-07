@@ -14,6 +14,7 @@
 </head>
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
+  <div class="scroll-progress" aria-hidden="true"><i></i></div>
 
   <header class="site-header" data-header>
     <a class="brand" href="#top" aria-label="정선민 포트폴리오 홈">
@@ -33,23 +34,24 @@
 
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="hero__glow" aria-hidden="true"></div>
+      <canvas class="hero__fluid" data-fluid-canvas aria-hidden="true"></canvas>
+      <div class="hero__topline">
+        <p class="hero__disciplines" aria-label="전문 분야">
+          <span>Web Design</span><span>UI / UX</span><span>Publishing</span>
+        </p>
+        <p class="hero__signature">Jung Sunmin Portfolio</p>
+      </div>
       <div class="hero__content">
-        <p class="eyebrow reveal">Web Design · UI/UX · Publishing</p>
-        <h1 id="hero-title" class="reveal">Thoughtful design,<br /><span>beautifully built.</span></h1>
-        <p class="hero__intro reveal">정보는 명확하게, 경험은 자연스럽게.<br />디자인의 의도를 실제 웹 경험으로 연결하는 웹디자이너 정선민입니다.</p>
-        <div class="hero__actions reveal">
-          <a class="button button--dark" href="#works">작업 보기 <span aria-hidden="true">↘</span></a>
-          <a class="button button--light" href="#projects">프로젝트 보기 <span aria-hidden="true">↘</span></a>
-          <a class="button button--light" href="./assets/resume.pdf" target="_blank" rel="noopener">이력서 열기 <span aria-hidden="true">↗</span></a>
+        <div class="hero__title-shell reveal">
+          <h1 id="hero-title">
+            <span class="hero__line hero__line--serif">Thoughtful design,</span>
+            <span class="hero__line hero__line--sans">beautifully</span>
+            <span class="hero__line hero__line--serif hero__line--indent">built.</span>
+          </h1>
         </div>
+        <p class="hero__intro reveal">정보는 명확하게, 경험은 자연스럽게.<br />디자인의 의도를 실제 웹 경험으로 연결하는 웹디자이너 정선민입니다.</p>
       </div>
-      <div class="hero__meta reveal" aria-label="포트폴리오 정보">
-        <span>Based in Korea</span>
-        <span>Available for opportunities</span>
-        <span>Portfolio 2026</span>
-      </div>
-      <a class="scroll-cue" href="#about" aria-label="소개 영역으로 이동"><span>Scroll</span><i aria-hidden="true"></i></a>
+      <a class="scroll-cue" href="#about" aria-label="소개 영역으로 이동"><span></span><small>Scroll</small></a>
     </section>
 
     <section class="intro section" id="about" aria-labelledby="about-title">
@@ -140,9 +142,13 @@
 
       <article class="project project--mobbly reveal">
         <a class="project__visual" href="./projects.html#mobbly" aria-label="모블리 프로젝트 자세히 보기">
-          <div class="device-stage">
-            <img class="device-stage__desktop" src="./assets/mokkup/Mokker.png" alt="모블리 웹사이트 데스크톱 목업" />
-            <img class="device-stage__mobile" src="./assets/mokkup/Mokker-2.png" alt="모블리 웹사이트 모바일 목업" />
+          <div class="device-stage device-stage--mobbly">
+            <div class="device-stage__desktop">
+              <img src="./Mobbly/img/banner/pc-hero banner (1).jpg" alt="모블리 데스크톱 메인 비주얼" />
+            </div>
+            <div class="device-stage__mobile">
+              <img src="./Mobbly/img/banner/hero banner - mo (1).jpg" alt="모블리 모바일 메인 비주얼" />
+            </div>
           </div>
         </a>
         <div class="project__info">
@@ -194,6 +200,7 @@
     <a href="#top">Back to top ↑</a>
   </footer>
 
+  <script src="./js/fluid-hero.js"></script>
   <script src="./script.js"></script>
 </body>
 </html>

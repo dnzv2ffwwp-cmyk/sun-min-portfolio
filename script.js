@@ -37,6 +37,50 @@
   window.addEventListener('scroll', updatePageChrome, { passive: true });
   window.addEventListener('resize', updatePageChrome, { passive: true });
 
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const scrollProgress = document.querySelector('.scroll-progress i');
+  let scrollFrame = 0;
+
+  const updateScrollEffects = () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? Math.min(1, window.scrollY / scrollable) : 0;
+    scrollProgress?.style.setProperty('transform', `scaleX(${progress})`);
+    scrollFrame = 0;
+  };
+  const requestScrollEffects = () => {
+    if (scrollFrame) return;
+    scrollFrame = window.requestAnimationFrame(updateScrollEffects);
+  };
+  updateScrollEffects();
+  window.addEventListener('scroll', requestScrollEffects, { passive: true });
+  window.addEventListener('resize', requestScrollEffects, { passive: true });
+
+  document.querySelectorAll('.capability-grid, .works-grid, .project__info, .profile__facts').forEach(group => {
+    [...group.children].forEach((item, index) => item.style.setProperty('--reveal-delay', `${Math.min(index, 4) * 90}ms`));
+  });
+
+  if (!reducedMotion.matches && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.work-card').forEach(card => {
+      const surface = card.querySelector('figure');
+      if (!surface) return;
+      card.addEventListener('pointermove', event => {
+        const rect = surface.getBoundingClientRect();
+        const x = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+        const y = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
+        surface.style.setProperty('--tilt-x', `${(0.5 - y) * 4}deg`);
+        surface.style.setProperty('--tilt-y', `${(x - 0.5) * 5}deg`);
+        surface.style.setProperty('--shine-x', `${x * 100}%`);
+        surface.style.setProperty('--shine-y', `${y * 100}%`);
+        card.classList.add('is-interacting');
+      });
+      card.addEventListener('pointerleave', () => {
+        surface.style.setProperty('--tilt-x', '0deg');
+        surface.style.setProperty('--tilt-y', '0deg');
+        card.classList.remove('is-interacting');
+      });
+    });
+  }
+
   document.querySelectorAll('[data-visual-carousel]').forEach(carousel => {
     const track = carousel.querySelector('[data-carousel-track]');
     const previous = carousel.querySelector('[data-carousel-prev]');
