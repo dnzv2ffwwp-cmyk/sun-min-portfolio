@@ -361,6 +361,7 @@ main,
   font-family: "SEBANG Gothic", "Pretendard", sans-serif;
   font-style: normal;
   letter-spacing: -.065em;
+  color: var(--point);
 }
 
 .hero__line--indent {
@@ -863,7 +864,7 @@ main,
 .work-card figure img {
   width: 100%;
   aspect-ratio: 3/4;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform .6s cubic-bezier(.2, .7, .2, 1);
 }
 
@@ -1187,6 +1188,7 @@ main,
     grid-template-columns: 1fr;
     align-content: end;
     gap: clamp(30px, 6vh, 58px);
+    padding-bottom: 24px;
   }
 
   .hero__intro {

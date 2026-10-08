@@ -1054,6 +1054,14 @@
 .mellowee-direction__index { display: flex; flex-wrap: wrap; gap: 16px 22px; padding: 20px 0 24px; border-bottom: 1px solid var(--md-line); color: var(--md-muted); font-size: 10px; }
 .mellowee-direction__index a { text-decoration: none; }
 .mellowee-direction__index b { margin-right: 5px; color: #73895c; }
+.mellowee-direction__meta { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 48px; margin: 0; padding: 34px 0 32px; border-bottom: 1px solid var(--md-line); }
+.mellowee-direction__meta::before,
+.mellowee-direction__meta::after { position: absolute; top: 34px; bottom: 34px; width: 1px; background: var(--md-line); content: ""; }
+.mellowee-direction__meta::before { left: calc(33.333% - 8px); }
+.mellowee-direction__meta::after { left: calc(66.666% + 8px); }
+.mellowee-direction__meta div { min-width: 0; }
+.mellowee-direction__meta dt { margin: 0 0 10px; color: #657557; font-size: 10px; font-weight: 700; letter-spacing: .04em; }
+.mellowee-direction__meta dd { margin: 0; color: var(--md-ink); font-size: 13px; line-height: 1.55; }
 .mellowee-direction__section { padding: clamp(68px, 7vw, 84px) 0; border-bottom: 1px solid var(--md-line); }
 .mellowee-direction__section-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, .78fr); align-items: start; gap: clamp(36px, 6vw, 72px); margin-bottom: 40px; }
 .mellowee-direction__section-head h4 { margin: 9px 0 10px; font-size: clamp(32px, 3.3vw, 40px); line-height: 1.15; letter-spacing: -.04em; }
@@ -1157,6 +1165,12 @@
   .mellowee-direction__hero-copy > p br { display: none; }
   .mellowee-direction__hero-photo { height: 330px; border-radius: 160px 160px 4px 4px; }
   .mellowee-direction__index { gap: 11px 14px; line-height: 1.45; }
+  .mellowee-direction__meta { grid-template-columns: 1fr; gap: 0; padding: 22px 0; }
+  .mellowee-direction__meta::before,
+  .mellowee-direction__meta::after { display: none; }
+  .mellowee-direction__meta div { padding: 15px 0; border-bottom: 1px solid var(--md-line); }
+  .mellowee-direction__meta div:last-child { border-bottom: 0; }
+  .mellowee-direction__meta dt { margin-bottom: 7px; }
   .mellowee-direction__section { padding: 48px 0; }
   .mellowee-direction__section-head { grid-template-columns: 1fr; gap: 0; margin-bottom: 27px; }
   .mellowee-direction__section-head h4 { font-size: 30px; }
