@@ -59,6 +59,70 @@
     [...group.children].forEach((item, index) => item.style.setProperty('--reveal-delay', `${Math.min(index, 4) * 90}ms`));
   });
 
+  document.querySelectorAll('[data-device-slider]').forEach(slider => {
+    const track = slider.querySelector('[data-device-track]');
+    let dragging = false;
+    let moved = false;
+    let startX = 0;
+    let startScroll = 0;
+    let touchStartX = 0;
+
+    const slideTo = index => {
+      const count = track.children.length;
+      const target = Math.max(0, Math.min(count - 1, index));
+      track.scrollTo({ left: target * track.clientWidth, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+    };
+
+    track.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'touch' || event.button !== 0) return;
+      dragging = true;
+      moved = false;
+      startX = event.clientX;
+      startScroll = track.scrollLeft;
+      track.classList.add('is-dragging');
+      track.setPointerCapture(event.pointerId);
+    });
+    track.addEventListener('pointermove', event => {
+      if (!dragging) return;
+      const distance = event.clientX - startX;
+      if (Math.abs(distance) > 5) moved = true;
+      track.scrollLeft = startScroll - distance;
+    });
+    const finishDrag = event => {
+      if (!dragging) return;
+      dragging = false;
+      track.classList.remove('is-dragging');
+      if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
+      slideTo(Math.round(track.scrollLeft / Math.max(1, track.clientWidth)));
+      window.setTimeout(() => { moved = false; }, 80);
+    };
+    track.addEventListener('pointerup', finishDrag);
+    track.addEventListener('pointercancel', finishDrag);
+    track.addEventListener('touchstart', event => {
+      touchStartX = event.touches[0]?.clientX || 0;
+      moved = false;
+    }, { passive: true });
+    track.addEventListener('touchmove', event => {
+      const currentX = event.touches[0]?.clientX || touchStartX;
+      if (Math.abs(currentX - touchStartX) > 7) moved = true;
+    }, { passive: true });
+    track.addEventListener('touchend', () => {
+      window.setTimeout(() => { moved = false; }, 120);
+    }, { passive: true });
+    track.addEventListener('keydown', event => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      const current = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+      slideTo(current + (event.key === 'ArrowRight' ? 1 : -1));
+    });
+    slider.addEventListener('click', event => {
+      if (!moved) return;
+      event.preventDefault();
+      event.stopPropagation();
+    }, true);
+    window.addEventListener('resize', () => slideTo(Math.round(track.scrollLeft / Math.max(1, track.clientWidth))), { passive: true });
+  });
+
   if (!reducedMotion.matches && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     document.querySelectorAll('.work-card').forEach(card => {
       const surface = card.querySelector('figure');
@@ -148,6 +212,47 @@
     }));
 
   });
+
+  const projectsSection = document.getElementById('projects');
+  const projectFigmaButton = document.querySelector('[data-project-figma-button]');
+  const figmaProjects = [...document.querySelectorAll('.project[data-figma-url]')];
+  if (projectsSection && projectFigmaButton && figmaProjects.length) {
+    const figmaName = projectFigmaButton.querySelector('[data-figma-name]');
+    const figmaLabel = projectFigmaButton.querySelector('[data-figma-label]');
+    let figmaFrame = 0;
+
+    const updateProjectFigmaButton = () => {
+      figmaFrame = 0;
+      const sectionRect = projectsSection.getBoundingClientRect();
+      const inProjects = sectionRect.top <= window.innerHeight * .45 && sectionRect.bottom > 120;
+      projectFigmaButton.classList.toggle('is-visible', inProjects);
+      projectFigmaButton.setAttribute('aria-hidden', String(!inProjects));
+      projectFigmaButton.tabIndex = inProjects ? 0 : -1;
+      if (!inProjects) return;
+
+      const viewportCenter = window.innerHeight * .5;
+      const currentProject = figmaProjects.reduce((closest, project) => {
+        const rect = project.getBoundingClientRect();
+        const distance = Math.abs((rect.top + rect.bottom) * .5 - viewportCenter);
+        return !closest || distance < closest.distance ? { project, distance } : closest;
+      }, null)?.project;
+      if (!currentProject) return;
+
+      const name = currentProject.dataset.figmaName;
+      const label = currentProject.dataset.figmaLabel;
+      projectFigmaButton.href = currentProject.dataset.figmaUrl;
+      figmaName.textContent = name;
+      figmaLabel.textContent = label;
+      projectFigmaButton.setAttribute('aria-label', `${name} ${label} 새 탭에서 보기`);
+    };
+    const requestProjectFigmaUpdate = () => {
+      if (!figmaFrame) figmaFrame = window.requestAnimationFrame(updateProjectFigmaButton);
+    };
+
+    updateProjectFigmaButton();
+    window.addEventListener('scroll', requestProjectFigmaUpdate, { passive: true });
+    window.addEventListener('resize', requestProjectFigmaUpdate, { passive: true });
+  }
 
   const revealItems = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {

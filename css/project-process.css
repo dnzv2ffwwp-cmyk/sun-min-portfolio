@@ -1129,6 +1129,7 @@
 .mellowee-direction__end p { margin: 0; color: var(--md-muted); font-size: 11px; line-height: 1.7; }
 .mellowee-direction__footer { display: flex; justify-content: space-between; gap: 20px; padding: 27px 0 38px; color: #70776b; font-size: 9px; letter-spacing: .08em; }
 .mellowee-direction__footer a { text-decoration: underline; letter-spacing: 0; }
+.mellowee-direction__footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px 22px; }
 
 @media (max-width: 900px) {
   .mellowee-direction__inner { width: calc(100% - 48px); }

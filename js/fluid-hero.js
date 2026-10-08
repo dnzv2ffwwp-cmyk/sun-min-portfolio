@@ -319,7 +319,7 @@
     bindTexture(velocity.read.texture, 0, locations.advection.velocity);
     bindTexture(dye.read.texture, 1, locations.advection.source);
     gl.uniform1f(locations.advection.dt, dt);
-    gl.uniform1f(locations.advection.dissipation, .997);
+    gl.uniform1f(locations.advection.dissipation, .99);
     drawTo(programs.advection, dye.write);
     dye.swap();
   };
@@ -376,20 +376,6 @@
   const clearPointer = () => { pointer = null; };
   const onResize = () => { resize(); pointer = null; };
 
-  const observer = new IntersectionObserver(entries => {
-    const visible = entries[0].isIntersecting;
-    canvas.classList.toggle('is-paused', !visible);
-    if (visible && !active && !reducedMotion.matches) {
-      active = true;
-      lastTime = performance.now();
-      frame = requestAnimationFrame(animate);
-    } else if (!visible && active) {
-      active = false;
-      cancelAnimationFrame(frame);
-    }
-  }, { threshold: .02 });
-  observer.observe(hero);
-
   window.addEventListener('resize', onResize, { passive: true });
   if (!reducedMotion.matches) {
     window.addEventListener('pointermove', onPointerMove, { passive: true });
@@ -408,7 +394,6 @@
   const destroy = () => {
     active = false;
     cancelAnimationFrame(frame);
-    observer.disconnect();
     window.removeEventListener('resize', onResize);
     window.removeEventListener('pointermove', onPointerMove);
     window.removeEventListener('pointerleave', clearPointer);
