@@ -213,6 +213,85 @@
 
   });
 
+  document.querySelectorAll('[data-detail-slider]').forEach(slider => {
+    const track = slider.querySelector('[data-detail-track]');
+    const cards = [...track.children];
+    const count = cards.length;
+    if (!count) return;
+
+    // Copies on both sides keep three-card views full across either boundary.
+    const copyCards = () => cards.map(card => {
+      const copy = card.cloneNode(true);
+      copy.setAttribute('aria-hidden', 'true');
+      copy.tabIndex = -1;
+      return copy;
+    });
+    track.prepend(...copyCards());
+    track.append(...copyCards());
+    const items = [...track.children];
+    let current = 0;
+    let settling = 0;
+    let moving = false;
+    let timer = 0;
+    let hovering = false;
+    let touching = false;
+    const position = index => items[index].offsetLeft - items[0].offsetLeft;
+    const jump = index => track.scrollTo({ left: position(index), behavior: 'instant' });
+    const normalize = () => {
+      const step = position(1);
+      if (!step) return;
+      const index = Math.round(track.scrollLeft / step);
+      current = ((index - count) % count + count) % count;
+      if (index < count || index >= count * 2) jump(count + current);
+      moving = false;
+    };
+    const move = direction => {
+      if (moving) return;
+      moving = true;
+      track.scrollTo({
+        left: position(count + current + direction),
+        behavior: reducedMotion.matches ? 'instant' : 'smooth'
+      });
+      window.clearTimeout(settling);
+      settling = window.setTimeout(normalize, 700);
+    };
+    const stop = () => { window.clearInterval(timer); };
+    const start = () => {
+      stop();
+      if (!document.hidden && !reducedMotion.matches && !hovering && !touching && !slider.contains(document.activeElement)) {
+        timer = window.setInterval(() => move(1), 4500);
+      }
+    };
+    slider.querySelector('[data-detail-prev]').addEventListener('click', () => move(-1));
+    slider.querySelector('[data-detail-next]').addEventListener('click', () => move(1));
+    track.addEventListener('scroll', () => {
+      window.clearTimeout(settling);
+      settling = window.setTimeout(normalize, 160);
+    }, { passive: true });
+    track.addEventListener('keydown', event => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      move(event.key === 'ArrowRight' ? 1 : -1);
+    });
+    track.addEventListener('focusin', event => {
+      const index = cards.indexOf(event.target.closest('.detail-feature'));
+      if (index >= 0) { current = index; jump(count + current); }
+    });
+    slider.addEventListener('mouseenter', () => { hovering = true; stop(); });
+    slider.addEventListener('mouseleave', () => { hovering = false; start(); });
+    slider.addEventListener('focusin', stop);
+    slider.addEventListener('focusout', () => window.setTimeout(start, 0));
+    track.addEventListener('touchstart', () => { touching = true; stop(); }, { passive: true });
+    const endTouch = () => { touching = false; start(); };
+    track.addEventListener('touchend', endTouch, { passive: true });
+    track.addEventListener('touchcancel', endTouch, { passive: true });
+    document.addEventListener('visibilitychange', start);
+    reducedMotion.addEventListener('change', start);
+    window.addEventListener('resize', () => { moving = false; jump(count + current); }, { passive: true });
+    requestAnimationFrame(() => jump(count));
+    start();
+  });
+
   const projectsSection = document.getElementById('projects');
   const projectFigmaButton = document.querySelector('[data-project-figma-button]');
   const figmaProjects = [...document.querySelectorAll('.project[data-figma-url]')];
