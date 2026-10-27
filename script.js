@@ -155,26 +155,57 @@
     let startX = 0;
     let startScroll = 0;
 
-    const cardStep = () => {
-      const firstCard = cards[0];
-      if (!firstCard) return track.clientWidth;
-      const styles = getComputedStyle(track);
-      const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0;
-      return firstCard.getBoundingClientRect().width + gap;
+    const count = cards.length;
+    if (!count) return;
+    const copies = () => cards.map(card => {
+      const copy = card.cloneNode(true);
+      copy.setAttribute('aria-hidden', 'true');
+      copy.tabIndex = -1;
+      return copy;
+    });
+    track.prepend(...copies());
+    track.append(...copies());
+    const items = [...track.children];
+    let current = 0;
+    let moving = false;
+    let settling = 0;
+    const position = index => items[index].offsetLeft - items[0].offsetLeft;
+    const jump = index => track.scrollTo({ left: position(index), behavior: 'instant' });
+    const normalize = () => {
+      if (dragging) return;
+      const step = position(1);
+      if (!step) return;
+      const index = Math.round(track.scrollLeft / step);
+      current = ((index - count) % count + count) % count;
+      if (index < count || index >= count * 2) jump(count + current);
+      moving = false;
     };
-
     const move = direction => {
-      const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
-      if (direction > 0 && track.scrollLeft >= maxScroll - 2) {
-        track.scrollTo({ left: 0, behavior: 'smooth' });
-        return;
-      }
-      if (direction < 0 && track.scrollLeft <= 2) {
-        track.scrollTo({ left: maxScroll, behavior: 'smooth' });
-        return;
-      }
-      track.scrollBy({ left: direction * cardStep(), behavior: 'smooth' });
+      if (moving || dragging) return;
+      moving = true;
+      track.scrollTo({
+        left: position(count + current + direction),
+        behavior: reducedMotion.matches ? 'instant' : 'smooth'
+      });
+      window.clearTimeout(settling);
+      settling = window.setTimeout(normalize, 700);
     };
+    track.addEventListener('scroll', () => {
+      window.clearTimeout(settling);
+      settling = window.setTimeout(normalize, 160);
+    }, { passive: true });
+    track.addEventListener('focusin', event => {
+      const index = cards.indexOf(event.target.closest('.asset-card'));
+      if (index >= 0) {
+        current = index;
+        jump(count + current);
+      }
+    });
+    window.addEventListener('resize', () => {
+      moving = false;
+      jump(count + current);
+    }, { passive: true });
+    requestAnimationFrame(() => jump(count));
 
     previous.addEventListener('click', () => move(-1));
     next.addEventListener('click', () => move(1));
@@ -203,13 +234,15 @@
       dragging = false;
       track.classList.remove('is-dragging');
       if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
+      window.clearTimeout(settling);
+      settling = window.setTimeout(normalize, 160);
       window.setTimeout(() => { dragged = false; }, 0);
     };
     track.addEventListener('pointerup', endDrag);
     track.addEventListener('pointercancel', endDrag);
-    cards.forEach(card => card.addEventListener('click', event => {
+    track.addEventListener('click', event => {
       if (dragged) event.preventDefault();
-    }));
+    }, true);
 
   });
 
