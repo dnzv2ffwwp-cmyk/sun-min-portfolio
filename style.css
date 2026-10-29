@@ -492,6 +492,13 @@ main,
   letter-spacing: -.055em;
 }
 
+#about-title,
+#works-title,
+#projects-title,
+#profile-title {
+  line-height: 1.25;
+}
+
 .section-heading--row {
   grid-template-columns: 1fr auto;
   align-items: end;
@@ -515,6 +522,40 @@ main,
     font-size: clamp(22px, 2.5vw, 26px);
     line-height: 1.55;
     letter-spacing: -.035em;
+}
+
+.capability-details > summary {
+  width: fit-content;
+  margin-top: 0;
+  margin-bottom: 24px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.capability-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.capability-details > summary:focus-visible {
+  outline: 2px solid var(--point);
+  outline-offset: 4px;
+}
+
+.capability-details__icon {
+  font-size: inherit;
+}
+
+.capability-details__less,
+.capability-details[open] .capability-details__more {
+  display: none;
+}
+
+.capability-details[open] .capability-details__less {
+  display: inline;
+}
+
+.capability-details[open] .capability-details__icon {
+  transform: rotate(180deg);
 }
 
 .capability-grid {
@@ -1274,8 +1315,13 @@ main,
     gap: clamp(26px, 5vh, 42px);
   }
 
+  .hero__title-shell {
+    min-width: 0;
+    container-type: inline-size;
+  }
+
   .hero__line {
-    font-size: clamp(43px, 13vw, 62px);
+    font-size: min(62px, 11.5cqw);
   }
 
   .hero__line--sans {
@@ -1301,8 +1347,8 @@ main,
   }
 
   .section {
-    padding-top: 95px;
-    padding-bottom: 95px;
+    padding-top: 55px;
+    padding-bottom: 55px;
   }
 
   .section-heading h2,
@@ -1312,7 +1358,11 @@ main,
 
   .intro__lead {
     margin-block: 45px;
-    font-size: 20px;
+    font-size: 16px;
+  }
+
+  #about-title {
+    font-size: 38px;
   }
 
   .project {
@@ -1464,6 +1514,10 @@ main,
   font-weight: 400;
   line-height: .94;
   letter-spacing: -.065em;
+}
+
+.subhero--projects .subhero__title h1 {
+  line-height: 1.25;
 }
 
 .subhero__title h1 span {
@@ -2278,10 +2332,12 @@ main,
     top: 8px;
     min-height: 68px;
     padding: 8px 20px;
+    justify-content: center;
   }
 
   .category-bar .category-pills {
-    width: 100%;
+    width: max-content;
+    flex: 0 1 auto;
     justify-content: flex-start;
   }
 
