@@ -1,0 +1,174 @@
+.site-footer {
+  position: relative;
+  z-index: auto;
+  padding: 0;
+  background: #568af5;
+  font-family: "SEBANG Gothic", sans-serif;
+}
+
+.site-footer__surface {
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-height: 80svh;
+  overflow: hidden;
+  padding: clamp(72px, 9vh, 110px) 5.4% clamp(32px, 5vh, 56px);
+  border-radius: 50% 50% 0 0 / 5% 5% 0 0;
+  background: #242424;
+  color: #fff;
+}
+
+.site-footer__vector {
+  position: absolute;
+  z-index: 0;
+  top: 6svh;
+  right: 0;
+  width: min(36vw, 565px, 88svh);
+  height: auto;
+  pointer-events: none;
+}
+
+.site-footer__main {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: clamp(48px, 8vh, 96px);
+}
+
+.site-footer__identity {
+  max-width: 72%;
+}
+
+.site-footer__name,
+.site-footer__english {
+  display: block;
+}
+
+.site-footer__name {
+  font-size: clamp(11px, 1.45vw, 28px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.04em;
+}
+
+.site-footer__english {
+  margin: 8px 0 clamp(24px, 3vw, 48px);
+  font-family: Arial, sans-serif;
+  font-size: clamp(12px, 1.35vw, 26px);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.site-footer__details {
+  color: #fff;
+  font-family: Arial, "SEBANG Gothic", sans-serif;
+  font-size: clamp(10px, 1.1vw, 21.5px);
+  font-style: normal;
+  line-height: 1.65;
+  white-space: nowrap;
+}
+.site-footer__details span { display: block; }
+.site-footer__details a {
+  display: inline-block;
+  padding-bottom: 1px;
+  border-bottom: 1px solid transparent;
+  color: inherit;
+  font-weight: 700;
+  line-height: 1.15;
+  text-decoration: none;
+}
+.site-footer__details a:hover,
+.site-footer__details a:focus-visible {
+  border-bottom-color: currentColor;
+  text-decoration: none;
+}
+
+.site-footer__links {
+  display: flex;
+  order: -1;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(8px, .8vw, 16px);
+  margin: 0;
+  padding-top: clamp(70px, 10vh, 125px);
+}
+
+.site-footer__links a {
+  color: #fff;
+  font-size: clamp(14px, 1.575vw, 31px);
+  font-weight: 700;
+  line-height: 1.12;
+  text-decoration: none;
+}
+
+.site-footer__links a,
+.site-footer__notice {
+  display: flex;
+  align-items: center;
+  gap: .2em;
+  width: max-content;
+  padding-bottom: 7px;
+  border-bottom: 1px solid transparent;
+}
+
+.site-footer__link-icon {
+  display: block;
+  width: .82em;
+  height: .82em;
+  filter: brightness(0) invert(1);
+  transition: transform .2s ease;
+}
+
+.site-footer__links a:hover,
+.site-footer__links a:focus-visible {
+  border-bottom-color: currentColor;
+  text-decoration: none;
+}
+.site-footer__links a:hover .site-footer__link-icon,
+.site-footer__links a:focus-visible .site-footer__link-icon { transform: translate(2px, -2px); }
+
+.site-footer__bottom {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: clamp(32px, 5vh, 56px);
+  color: #a8a8a8;
+  font-family: Arial, sans-serif;
+  font-size: clamp(9px, 1.08vw, 22px);
+}
+
+.site-footer__bottom small {
+  font-size: inherit;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .site-footer { padding: 0; }
+  .site-footer__surface {
+    min-height: max(560px, 40svh);
+    padding: clamp(52px, 7svh, 68px) 25px clamp(24px, 4svh, 28px);
+    border-radius: 50% 50% 0 0 / 3% 3% 0 0;
+  }
+  .site-footer__vector { top: 4svh; right: 0; width: min(82vw, 330px, 90svh); }
+  .site-footer__main { gap: clamp(32px, 6vh, 56px); }
+  .site-footer__identity { max-width: 100%; }
+  .site-footer__name { font-size: clamp(14px, 3.5vw, 23px); }
+  .site-footer__english { margin: 6px 0 24px; font-size: clamp(8px, 2.2vw, 14px); }
+  .site-footer__details { font-size: clamp(7.5px, 2vw, 12px); white-space: normal; }
+  .site-footer__links {
+    gap: 7px;
+    padding-top: clamp(24px, 4svh, 42px);
+  }
+  .site-footer__links a,
+  .site-footer__notice { font-size: clamp(11px, 3.15vw, 19px); }
+  .site-footer__bottom { margin-top: 32px; }
+}

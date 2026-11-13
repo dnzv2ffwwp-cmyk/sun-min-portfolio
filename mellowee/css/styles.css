@@ -686,3 +686,7 @@ button {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Banner artwork includes a CTA; make the whole slide actionable. */
+.hero-slide__link { position: absolute; inset: 0; z-index: 2; }
+.hero-slide__link:focus-visible { outline: 3px solid #61734f; outline-offset: -5px; }

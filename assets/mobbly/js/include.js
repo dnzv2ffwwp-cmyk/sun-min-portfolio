@@ -27,7 +27,7 @@ const fallbackMarkup = {
                         <li><a href="./list.html">SHOP</a></li>
                         <li><a href="#">COLLECTION</a></li>
                         <li><a href="#">COMMUNITY</a></li>
-                        <li><a href="#">SALE</a></li>
+                        <li><a href="./list.html">SALE</a></li>
                     </ul>
                 </div>
             </div>
@@ -69,7 +69,7 @@ const fallbackMarkup = {
                             <li><a href="./index.html">HOME</a></li>
                             <li><a href="./new-product.html">NEW</a></li>
                             <li><a href="./list.html">SHOP</a></li>
-                            <li><a href="#">SALE</a></li>
+                            <li><a href="./list.html">SALE</a></li>
                         </ul>
                     </div>
                 </div>
@@ -87,7 +87,7 @@ const fallbackMarkup = {
                                 <h4><a href="./list.html">SHOP</a></h4>
                             </section>
                             <section>
-                                <h4><a href="#">SALE</a></h4>
+                                <h4><a href="./list.html">SALE</a></h4>
                             </section>
                         </div>
                     </div>

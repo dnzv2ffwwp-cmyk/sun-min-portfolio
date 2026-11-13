@@ -1,0 +1,528 @@
+@charset "UTF-8";
+
+/*
+ * MELLOWEE — Figma local styles → CSS
+ * Source file: fO8YvuSxVdMpb8JnBeEsuw
+ * Generated: 2026-09-01
+ *
+ * Font files are not bundled here. Load Pretendard and Roboto in the project
+ * before using these classes. Figma's AUTO line height maps to CSS `normal`.
+ */
+
+
+:root {
+  /* Font families */
+  --font-pc: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-pad: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mo: "Roboto", "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-point: "Mabook", sans-serif;
+  /* Font weights */
+  --fw-regular: 400;
+  --fw-bold: 700;
+
+  /* 디바이스 별 글씨 크기 기준 */
+  --fs-pc: 16px;
+  --fs-pad: 14px;
+  --fs-mo: 12px; 
+
+  /* 태그 글씨 크기 */
+  --fs-h4: 1.25rem;
+  --fs-h3: 1.5625rem;
+  --fs-h2: 1.9531rem;
+  --fs-h1: 2.4414rem;
+  --fs-body1: 1rem;
+  --fs-body2: 0.85rem;
+  --fs-detail: 0.7225rem;
+
+
+
+  /* PC text styles */
+  /* --fs-h1: 39px;
+  --fs-h2: 31px;
+  --fs-h3: 25px;
+  --fs-h4: 20px;
+  --fs-body1: 16px;
+  --fs-body2: 13px;
+  --fs-detail: 10px; */
+
+
+  /* Pad text styles */
+  /* --fs-h1: 34px;
+  --fs-h2: 27px;
+  --fs-h3: 22px;
+  --fs-h4: 18px;
+  --fs-body1: 14px;
+  --fs-body2: 11px;
+  --fs-detail: 9px; */
+
+  /* Mobile text styles */
+  /* --fs-h1: 19px;
+  --fs-h2: 17px;
+  --fs-h3: 15px;
+  --fs-h4: 14px;
+  --fs-body1: 12px;
+  --fs-body2: 11px;
+  --fs-detail: 9px; */
+
+
+  /* Main colors */
+  --mellowee-main-green: #A1B889;
+  --mellowee-main-pink: #F3AAAC;
+  --mellowee-main-beige: #D7BA92;
+
+  /* Primary — green */
+  --mellowee-primary-050: #F2F7EE;
+  --mellowee-primary-100: #E3EBDB;
+  --mellowee-primary-200: #D0DDC3;
+  --mellowee-primary-300: #BDCEAB;
+  --mellowee-primary-400: #AEC399;
+  --mellowee-primary-500: #A1B889;
+  --mellowee-primary-600: #8AA271;
+  --mellowee-primary-700: #73895C;
+  --mellowee-primary-800: #5E704B;
+  --mellowee-primary-900: #475538;
+
+  /* Black / neutral */
+  --mellowee-black-000: #FFFFFF;
+  --mellowee-black-050: #F5F5F5;
+  --mellowee-black-100: #E5E5E5;
+  --mellowee-black-200: #CCCCCC;
+  --mellowee-black-300: #B2B2B2;
+  --mellowee-black-400: #999999;
+  --mellowee-black-500: #7F7F7F;
+  --mellowee-black-600: #666666;
+  --mellowee-black-700: #4C4C4C;
+  --mellowee-black-800: #121212;
+  --mellowee-black-900: #000000;
+
+  /* Pink */
+  --mellowee-pink-050: #FEF8F8;
+  --mellowee-pink-100: #FDEEEE;
+  --mellowee-pink-200: #FBE1E2;
+  --mellowee-pink-300: #F9D5D6;
+  --mellowee-pink-400: #F6BFC1;
+  --mellowee-pink-500: #F3AAAC;
+  --mellowee-pink-600: #CF9192;
+  --mellowee-pink-700: #AA7778;
+  --mellowee-pink-800: #7A5556;
+  --mellowee-pink-900: #493334;
+
+  /* Beige */
+  --mellowee-beige-050: #FCF9F6;
+  --mellowee-beige-100: #F7F1E9;
+  --mellowee-beige-200: #F1E7D9;
+  --mellowee-beige-300: #EBDDC9;
+  --mellowee-beige-400: #E1CBAD;
+  --mellowee-beige-500: #D7BA92;
+  --mellowee-beige-600: #B79E7C;
+  --mellowee-beige-700: #978266;
+  --mellowee-beige-800: #6C5D49;
+  --mellowee-beige-900: #41382C;
+
+  /* Figma local color variables */
+  --color-kakao: #FEE500;
+  --color-naver: #03A94D;
+  --color-selection: #1967D2;
+  --color-danger: #E62C2C;
+
+  /* External library paint styles used on node 38:615 */
+  --color-main-khaki-000: #FFFFFF;
+  --color-main-khaki-500: #5F7F56;
+
+  /* Legacy aliases and layout tokens for older page-specific CSS
+     (keeps existing brand-story.css working without large refactor) */
+  --green-500: var(--mellowee-primary-500);
+  --black-700: var(--mellowee-black-700);
+  --pink-050: var(--mellowee-pink-050);
+
+  /* page spacing defaults (can be adjusted project-wide) */
+  --page-gutter: 48px;
+  --section-gap: 120px;
+  /* Set global base font to the PC token so styles.css uses consistent family */
+  --font-family-base: var(--font-pc);
+}
+  /* Shared Figma text-style properties */
+  [class^="text-pc-"],
+  [class*=" text-pc-"] {
+    font-family: var(--font-pc);
+    letter-spacing: 0;
+    text-transform: none;
+    text-decoration: none;
+  }
+
+  [class^="text-pad-"],
+  [class*=" text-pad-"] {
+    font-family: var(--font-pad);
+    letter-spacing: 0;
+    text-transform: none;
+    text-decoration: none;
+  }
+
+  [class^="text-mo-"],
+  [class*=" text-mo-"] {
+    font-family: var(--font-mo);
+    letter-spacing: 0;
+    text-transform: none;
+    text-decoration: none;
+  }
+
+  /* PC: one-to-one mappings for Figma PC styles */
+  .text-pc-h1-regular,
+  .text-pc-h1-bold {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-pc-h1);
+  }
+
+  .text-pc-h2-regular,
+  .text-pc-h2-bold {
+    font-size: var(--fs-h2);
+    line-height: var(--lh-pc-h2);
+  }
+
+  .text-pc-h3-regular,
+  .text-pc-h3-bold {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-pc-h3);
+  }
+
+  .text-pc-h4-regular,
+  .text-pc-h4-bold {
+    font-size: var(--fs-h4);
+    line-height: var(--lh-pc-h4);
+  }
+
+  .text-pc-body1-regular,
+  .text-pc-body1-bold {
+    font-size: var(--fs-body1);
+    line-height: var(--lh-pc-body1);
+  }
+
+  .text-pc-body2-regular,
+  .text-pc-body2-bold {
+    font-size: var(--fs-body2);
+    line-height: var(--lh-pc-body2);
+  }
+
+  .text-pc-detail-regular,
+  .text-pc-detail-bold {
+    font-size: var(--fs-detail);
+    line-height: var(--lh-pc-detail);
+  }
+
+  /* Pad: one-to-one mappings for Figma pad styles */
+  .text-pad-h1-regular,
+  .text-pad-h1-bold {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-pad-h1);
+  }
+
+  .text-pad-h2-regular,
+  .text-pad-h2-bold {
+    font-size: var(--fs-h2);
+    line-height: var(--lh-pad-h2);
+  }
+
+  .text-pad-h3-regular,
+  .text-pad-h3-bold {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-pad-h3);
+  }
+
+  .text-pad-h4-regular,
+  .text-pad-h4-bold {
+    font-size: var(--fs-h4);
+    line-height: var(--lh-pad-h4);
+  }
+
+  .text-pad-body1-regular,
+  .text-pad-body1-bold {
+    font-size: var(--fs-body1);
+    line-height: var(--lh-pad-body1);
+  }
+
+  .text-pad-body2-regular,
+  .text-pad-body2-bold {
+    font-size: var(--fs-body2);
+    line-height: var(--lh-pad-body2);
+  }
+
+  .text-pad-detail-regular,
+  .text-pad-detail-bold {
+    font-size: var(--fs-detail);
+    line-height: var(--lh-pad-detail);
+  }
+
+  /* Mobile: one-to-one mappings for Figma mo styles */
+  .text-mo-h1-regular,
+  .text-mo-h1-bold {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-mo-h1);
+  }
+
+  .text-mo-h2-regular,
+  .text-mo-h2-bold {
+    font-size: var(--fs-h2);
+    line-height: var(--lh-mo-h2);
+  }
+
+  .text-mo-h3-regular,
+  .text-mo-h3-bold {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-mo-h3);
+  }
+
+  .text-mo-h4-regular,
+  .text-mo-h4-bold {
+    font-size: var(--fs-h4);
+    line-height: var(--lh-mo-h4);
+  }
+
+  .text-mo-body1-regular,
+  .text-mo-body1-bold {
+    font-size: var(--fs-body1);
+    line-height: var(--lh-mo-body1);
+  }
+
+  .text-mo-body2-regular,
+  .text-mo-body2-bold {
+    font-size: var(--fs-body2);
+    line-height: var(--lh-mo-body2);
+  }
+
+  .text-mo-detail-regular,
+  .text-mo-detail-bold {
+    font-size: var(--fs-detail);
+    line-height: var(--lh-mo-detail);
+  }
+
+  /* Weight mappings for all 42 Figma text styles */
+  .text-pc-h1-regular,
+  .text-pc-h2-regular,
+  .text-pc-h3-regular,
+  .text-pc-h4-regular,
+  .text-pc-body1-regular,
+  .text-pc-body2-regular,
+  .text-pc-detail-regular,
+  .text-pad-h1-regular,
+  .text-pad-h2-regular,
+  .text-pad-h3-regular,
+  .text-pad-h4-regular,
+  .text-pad-body1-regular,
+  .text-pad-body2-regular,
+  .text-pad-detail-regular,
+  .text-mo-h1-regular,
+  .text-mo-h2-regular,
+  .text-mo-h3-regular,
+  .text-mo-h4-regular,
+  .text-mo-body1-regular,
+  .text-mo-body2-regular,
+  .text-mo-detail-regular {
+    font-weight: var(--fw-regular);
+  }
+
+  .text-pc-h1-bold,
+  .text-pc-h2-bold,
+  .text-pc-h3-bold,
+  .text-pc-h4-bold,
+  .text-pc-body1-bold,
+  .text-pc-body2-bold,
+  .text-pc-detail-bold,
+  .text-pad-h1-bold,
+  .text-pad-h2-bold,
+  .text-pad-h3-bold,
+  .text-pad-h4-bold,
+  .text-pad-body1-bold,
+  .text-pad-body2-bold,
+  .text-pad-detail-bold,
+  .text-mo-h1-bold,
+  .text-mo-h2-bold,
+  .text-mo-h3-bold,
+  .text-mo-h4-bold,
+  .text-mo-body1-bold,
+  .text-mo-body2-bold,
+  .text-mo-detail-bold {
+    font-weight: var(--fw-bold);
+  }
+
+  /*
+ * Optional responsive semantic classes.
+ * PC: 1200px+, Pad: 768–1199px, Mobile: 0–767px.
+ * Add `.is-bold` when the Figma Bold style is required.
+ */
+  .text-h1,
+  .text-h2,
+  .text-h3,
+  .text-h4,
+  .text-body1,
+  .text-body2,
+  .text-detail {
+    font-family: var(--font-pc);
+    font-weight: var(--fw-regular);
+    letter-spacing: 0;
+    text-transform: none;
+    text-decoration: none;
+  }
+
+  .text-h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-pc-h1);
+  }
+
+  .text-h2 {
+    font-size: var(--fs-h2);
+    line-height: var(--lh-pc-h2);
+  }
+
+  .text-h3 {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-pc-h3);
+  }
+
+  .text-h4 {
+    font-size: var(--fs-h4);
+    line-height: var(--lh-pc-h4);
+  }
+
+  .text-body1 {
+    font-size: var(--fs-body1);
+    line-height: var(--lh-pc-body1);
+  }
+
+  .text-body2 {
+    font-size: var(--fs-body2);
+    line-height: var(--lh-pc-body2);
+  }
+
+  .text-detail {
+    font-size: var(--fs-detail);
+    line-height: var(--lh-pc-detail);
+  }
+
+  .is-bold {
+    font-weight: var(--fw-bold);
+  }
+
+html {
+  font-size: var(--fs-pc);
+  font-family: 'Pretendard', sans-serif;
+  font-weight: var(--fw-regular);
+  color: var(--mellowee-black-800);
+}
+
+  @media (max-width: 1199px) {
+    html {
+      font-size: var(--fs-pad);
+    }
+
+    .text-h1,
+    .text-h2,
+    .text-h3,
+    .text-h4,
+    .text-body1,
+    .text-body2,
+    .text-detail {
+      font-family: var(--font-pad);
+    }
+
+    .text-h1 {
+      font-size: var(--fs-h1);
+      line-height: var(--lh-pad-h1);
+    }
+
+    .text-h2 {
+      font-size: var(--fs-h2);
+      line-height: var(--lh-pad-h2);
+    }
+
+    .text-h3 {
+      font-size: var(--fs-h3);
+      line-height: var(--lh-pad-h3);
+    }
+
+    .text-h4 {
+      font-size: var(--fs-h4);
+      line-height: var(--lh-pad-h4);
+    }
+
+    .text-body1 {
+      font-size: var(--fs-body1);
+      line-height: var(--lh-pad-body1);
+    }
+
+    .text-body2 {
+      font-size: var(--fs-body2);
+      line-height: var(--lh-pad-body2);
+    }
+
+    .text-detail {
+      font-size: var(--fs-detail);
+      line-height: var(--lh-pad-detail);
+    }
+  }
+
+  @media (max-width: 767px) {
+
+    html {
+      font-size: var(--fs-mo);
+    }
+
+    .text-h1,
+    .text-h2,
+    .text-h3,
+    .text-h4,
+    .text-body1,
+    .text-body2,
+    .text-detail {
+      font-family: var(--font-mo);
+    }
+
+    .text-h1 {
+      font-size: var(--fs-h1);
+      line-height: var(--lh-mo-h1);
+    }
+
+    .text-h2 {
+      font-size: var(--fs-h2);
+      line-height: var(--lh-mo-h2);
+    }
+
+    .text-h3 {
+      font-size: var(--fs-h3);
+      line-height: var(--lh-mo-h3);
+    }
+
+    .text-h4 {
+      font-size: var(--fs-h4);
+      line-height: var(--lh-mo-h4);
+    }
+
+    .text-body1 {
+      font-size: var(--fs-body1);
+      line-height: var(--lh-mo-body1);
+    }
+
+    .text-body2 {
+      font-size: var(--fs-body2);
+      line-height: var(--lh-mo-body2);
+    }
+
+    .text-detail {
+      font-size: var(--fs-detail);
+      line-height: var(--lh-mo-detail);
+    }
+  }
+
+  @font-face {
+    font-family: "Mabook";
+    src: url("../font/Mabook.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  .point-title {
+    font-family: "Mabook", cursive;
+    font-size: 48px;
+    font-weight: 400;
+  }
+

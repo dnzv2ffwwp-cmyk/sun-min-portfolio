@@ -275,3 +275,7 @@
 }
 
 
+
+.hero-slider .swiper-slide { position: relative; }
+.hero-slider .hero-slide-link { position: absolute; inset: 0; z-index: 1; }
+.hero-slider .hero-slide-link:focus-visible { outline: 3px solid #222; outline-offset: -5px; }

@@ -3,6 +3,7 @@
   const menuButton = document.querySelector('[data-menu-toggle]');
   const navigation = document.querySelector('[data-navigation]');
   const categoryBar = document.querySelector('[data-sticky-nav]');
+  const aboutSection = document.querySelector('#about');
 
   const closeMenu = () => {
     menuButton?.setAttribute('aria-expanded', 'false');
@@ -19,7 +20,13 @@
 
   navigation?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') closeMenu();
+    if (event.key === 'Escape' && menuButton?.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+      menuButton.focus();
+    }
+  });
+  document.addEventListener('click', event => {
+    if (header?.classList.contains('is-compact') && !header.contains(event.target)) closeMenu();
   });
   window.addEventListener('resize', () => {
     if (window.innerWidth > 900) closeMenu();
@@ -27,6 +34,11 @@
 
   const updatePageChrome = () => {
     header?.classList.toggle('is-scrolled', window.scrollY > 24);
+    if (header && aboutSection) {
+      const compact = aboutSection.getBoundingClientRect().top <= 100;
+      if (header.classList.contains('is-compact') !== compact) closeMenu();
+      header.classList.toggle('is-compact', compact);
+    }
     if (!categoryBar) return;
     const stickyTop = Number.parseFloat(getComputedStyle(categoryBar).top) || 0;
     const isSticky = categoryBar.getBoundingClientRect().top <= stickyTop + 1 && window.scrollY > 24;
@@ -145,6 +157,34 @@
     });
   }
 
+  // Advance only after five seconds without interaction, even if the pointer stays over a card.
+  const workAutoplay = (root, advance) => {
+    let timer = 0;
+    let visible = !('IntersectionObserver' in window);
+    const stop = () => window.clearTimeout(timer);
+    const start = () => {
+      stop();
+      if (!visible || document.hidden || reducedMotion.matches) return;
+      timer = window.setTimeout(() => {
+        if (!document.querySelector('dialog[open]')) advance(1);
+        start();
+      }, 5000);
+    };
+    ['pointermove', 'pointerdown', 'wheel', 'keydown', 'focusin'].forEach(type => {
+      root.addEventListener(type, start, { passive: true });
+    });
+    document.addEventListener('visibilitychange', start);
+    reducedMotion.addEventListener('change', start);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(entries => {
+        visible = entries[0].isIntersecting;
+        start();
+      }, { threshold: .15 }).observe(root);
+    }
+    start();
+    return { start, stop };
+  };
+
   document.querySelectorAll('[data-visual-carousel]').forEach(carousel => {
     const track = carousel.querySelector('[data-carousel-track]');
     const previous = carousel.querySelector('[data-carousel-prev]');
@@ -166,6 +206,87 @@
     track.prepend(...copies());
     track.append(...copies());
     const items = [...track.children];
+    if (carousel.closest('#popup, #poster')) {
+      track.classList.add('is-continuous');
+      let offset = 0;
+      let lastTime = 0;
+      let inView = !('IntersectionObserver' in window);
+      let held = false;
+      let originX = 0;
+      let originOffset = 0;
+      let didDrag = false;
+      let manual = 0;
+      const step = () => items[1].getBoundingClientRect().left - items[0].getBoundingClientRect().left;
+      const base = () => items[count].getBoundingClientRect().left - items[0].getBoundingClientRect().left;
+      const render = () => {
+        const cycle = base();
+        if (!cycle) return;
+        while (offset < cycle) offset += cycle;
+        while (offset >= cycle * 2) offset -= cycle;
+        track.scrollLeft = offset;
+      };
+      const tick = now => {
+        const elapsed = lastTime ? Math.min((now - lastTime) / 1000, .05) : 0;
+        lastTime = now;
+        if (inView && !held && !document.hidden && !document.querySelector('dialog[open]')) {
+          if (!reducedMotion.matches) offset += 24 * elapsed;
+          if (manual) {
+            const delta = Math.sign(manual) * Math.min(Math.abs(manual), Math.max(1, step() * 2.5 * elapsed));
+            offset += delta;
+            manual -= delta;
+          }
+          render();
+        }
+        requestAnimationFrame(tick);
+      };
+      const nudge = direction => {
+        if (reducedMotion.matches) { offset += direction * step(); render(); }
+        else manual += direction * step();
+      };
+      previous.addEventListener('click', () => nudge(-1));
+      next.addEventListener('click', () => nudge(1));
+      track.addEventListener('keydown', event => {
+        if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+        event.preventDefault();
+        nudge(event.key === 'ArrowRight' ? 1 : -1);
+      });
+      track.addEventListener('pointerdown', event => {
+        if (event.button !== 0) return;
+        held = true; didDrag = false; manual = 0;
+        originX = event.clientX; originOffset = offset;
+      });
+      track.addEventListener('pointermove', event => {
+        if (!held) return;
+        const distance = event.clientX - originX;
+        if (Math.abs(distance) > 4) { didDrag = true; track.setPointerCapture(event.pointerId); }
+        offset = originOffset - distance;
+        // Wrap by a full repeated set without changing the pointer's reference position.
+        const before = offset;
+        render();
+        originOffset += offset - before;
+      });
+      const release = event => {
+        held = false;
+        if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
+        window.setTimeout(() => { didDrag = false; }, 0);
+      };
+      track.addEventListener('pointerup', release);
+      track.addEventListener('pointercancel', release);
+      track.addEventListener('dragstart', event => event.preventDefault());
+      track.addEventListener('click', event => { if (didDrag) event.preventDefault(); }, true);
+      track.addEventListener('wheel', event => {
+        if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
+        event.preventDefault(); offset += event.deltaX; render();
+      }, { passive: false });
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(entries => { inView = entries[0].isIntersecting; }, { threshold: .05 }).observe(carousel);
+      }
+      window.addEventListener('resize', () => { offset = base(); render(); }, { passive: true });
+      offset = base();
+      render();
+      requestAnimationFrame(tick);
+      return;
+    }
     let current = 0;
     let moving = false;
     let settling = 0;
@@ -190,6 +311,7 @@
       window.clearTimeout(settling);
       settling = window.setTimeout(normalize, 700);
     };
+    workAutoplay(carousel, move);
     track.addEventListener('scroll', () => {
       window.clearTimeout(settling);
       settling = window.setTimeout(normalize, 160);
@@ -221,12 +343,14 @@
       startX = event.clientX;
       startScroll = track.scrollLeft;
       track.classList.add('is-dragging');
-      track.setPointerCapture(event.pointerId);
     });
     track.addEventListener('pointermove', event => {
       if (!dragging) return;
       const distance = event.clientX - startX;
-      if (Math.abs(distance) > 4) dragged = true;
+      if (Math.abs(distance) > 4) {
+        dragged = true;
+        track.setPointerCapture(event.pointerId);
+      }
       track.scrollLeft = startScroll - distance;
     });
     const endDrag = event => {
@@ -252,49 +376,83 @@
     const count = cards.length;
     if (!count) return;
 
-    // Copies on both sides keep three-card views full across either boundary.
+    // Keep enough trailing copies for a 3.5-card viewport to reach the loop boundary.
     const copyCards = () => cards.map(card => {
       const copy = card.cloneNode(true);
       copy.setAttribute('aria-hidden', 'true');
       copy.tabIndex = -1;
+      copy.querySelectorAll('img').forEach(image => { image.loading = 'eager'; });
       return copy;
     });
     track.prepend(...copyCards());
-    track.append(...copyCards());
+    track.append(...copyCards(), ...copyCards());
     const items = [...track.children];
     let current = 0;
     let settling = 0;
     let moving = false;
-    let timer = 0;
-    let hovering = false;
     let touching = false;
-    const position = index => items[index].offsetLeft - items[0].offsetLeft;
-    const jump = index => track.scrollTo({ left: position(index), behavior: 'instant' });
+    let dragging = false;
+    let dragged = false;
+    let dragX = 0;
+    let dragScroll = 0;
+    let animation = 0;
+    let restoring = 0;
+    const position = index => items[index].getBoundingClientRect().left - items[0].getBoundingClientRect().left;
+    const lockScroll = () => {
+      cancelAnimationFrame(restoring);
+      track.style.scrollSnapType = 'none';
+      track.style.scrollBehavior = 'auto';
+    };
+    const restoreScroll = () => {
+      restoring = requestAnimationFrame(() => {
+        restoring = requestAnimationFrame(() => {
+          if (moving || dragging) return;
+          track.style.removeProperty('scroll-snap-type');
+          track.style.removeProperty('scroll-behavior');
+        });
+      });
+    };
+    const jump = index => {
+      lockScroll();
+      track.scrollLeft = position(index);
+      restoreScroll();
+    };
     const normalize = () => {
+      if (dragging || touching || animation) return;
       const step = position(1);
       if (!step) return;
       const index = Math.round(track.scrollLeft / step);
       current = ((index - count) % count + count) % count;
-      if (index < count || index >= count * 2) jump(count + current);
+      if (index < count || index >= count * 2) {
+        // Preserve the exact visible offset when swapping identical copies.
+        lockScroll();
+        track.scrollLeft += position(count + current) - position(index);
+      }
       moving = false;
+      restoreScroll();
     };
     const move = direction => {
-      if (moving) return;
+      if (moving || dragging || touching) return;
       moving = true;
-      track.scrollTo({
-        left: position(count + current + direction),
-        behavior: reducedMotion.matches ? 'instant' : 'smooth'
-      });
-      window.clearTimeout(settling);
-      settling = window.setTimeout(normalize, 700);
+      lockScroll();
+      const from = track.scrollLeft;
+      const to = position(count + current + direction);
+      const duration = reducedMotion.matches ? 0 : 520;
+      const started = performance.now();
+      const tick = now => {
+        const progress = duration ? Math.min(1, (now - started) / duration) : 1;
+        const eased = progress < .5 ? 4 * progress ** 3 : 1 - (-2 * progress + 2) ** 3 / 2;
+        track.scrollLeft = from + (to - from) * eased;
+        if (progress < 1) {
+          animation = requestAnimationFrame(tick);
+        } else {
+          animation = 0;
+          normalize();
+        }
+      };
+      animation = requestAnimationFrame(tick);
     };
-    const stop = () => { window.clearInterval(timer); };
-    const start = () => {
-      stop();
-      if (!document.hidden && !reducedMotion.matches && !hovering && !touching && !slider.contains(document.activeElement)) {
-        timer = window.setInterval(() => move(1), 4500);
-      }
-    };
+    const { start, stop } = workAutoplay(slider, move);
     slider.querySelector('[data-detail-prev]').addEventListener('click', () => move(-1));
     slider.querySelector('[data-detail-next]').addEventListener('click', () => move(1));
     track.addEventListener('scroll', () => {
@@ -310,16 +468,53 @@
       const index = cards.indexOf(event.target.closest('.detail-feature'));
       if (index >= 0) { current = index; jump(count + current); }
     });
-    slider.addEventListener('mouseenter', () => { hovering = true; stop(); });
-    slider.addEventListener('mouseleave', () => { hovering = false; start(); });
-    slider.addEventListener('focusin', stop);
-    slider.addEventListener('focusout', () => window.setTimeout(start, 0));
-    track.addEventListener('touchstart', () => { touching = true; stop(); }, { passive: true });
-    const endTouch = () => { touching = false; start(); };
+    track.addEventListener('pointerdown', event => {
+      if (event.pointerType !== 'mouse' || event.button !== 0) return;
+      cancelAnimationFrame(animation);
+      animation = 0;
+      moving = false;
+      lockScroll();
+      dragging = true;
+      dragged = false;
+      dragX = event.clientX;
+      dragScroll = track.scrollLeft;
+      stop();
+      track.classList.add('is-dragging');
+    });
+    track.addEventListener('pointermove', event => {
+      if (!dragging) return;
+      const distance = event.clientX - dragX;
+      if (Math.abs(distance) > 5) {
+        dragged = true;
+        track.setPointerCapture(event.pointerId);
+      }
+      track.scrollLeft = dragScroll - distance;
+    });
+    const endDrag = event => {
+      if (!dragging) return;
+      dragging = false;
+      track.classList.remove('is-dragging');
+      if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
+      window.clearTimeout(settling);
+      settling = window.setTimeout(normalize, 160);
+      window.setTimeout(() => { dragged = false; }, 0);
+      start();
+    };
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+    track.addEventListener('dragstart', event => event.preventDefault());
+    track.addEventListener('click', event => {
+      if (dragged) event.preventDefault();
+    }, true);
+    track.addEventListener('touchstart', () => { cancelAnimationFrame(animation); animation = 0; moving = false; restoreScroll(); touching = true; stop(); }, { passive: true });
+    const endTouch = () => {
+      touching = false;
+      window.clearTimeout(settling);
+      settling = window.setTimeout(normalize, 160);
+      start();
+    };
     track.addEventListener('touchend', endTouch, { passive: true });
     track.addEventListener('touchcancel', endTouch, { passive: true });
-    document.addEventListener('visibilitychange', start);
-    reducedMotion.addEventListener('change', start);
     window.addEventListener('resize', () => { moving = false; jump(count + current); }, { passive: true });
     requestAnimationFrame(() => jump(count));
     start();
