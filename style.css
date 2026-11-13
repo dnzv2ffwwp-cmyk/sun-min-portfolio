@@ -3424,10 +3424,9 @@ main,
 
 .brand__mark--favicon { object-fit: contain; background: transparent; padding: 0; }
 
-.projects-archive { --page-ink: #202020; --page-gutter: 0px; margin-top: clamp(48px, 6vw, 90px); }
-.projects-archive .category-bar { position: static; width: 100%; margin: 0 0 40px; padding: 0; }
-.projects-archive .category-pills { justify-content: flex-start; }
-.projects-archive .project-detail { padding-inline: 0; }
+.projects-archive { --page-ink: #202020; --page-gutter: 0px; margin-top: clamp(24px, 3vw, 45px); }
+.projects-archive .project-detail { padding: clamp(32px, 4vw, 60px) 0; }
+.projects-archive .project-detail:first-child { padding-top: 12px; }
 
 /* Reveal the next work at each viewport size. */
 @media (min-width: 621px) and (max-width: 1100px) {
@@ -3511,3 +3510,4 @@ main,
 /* Keep the original skill layout with equal space on both sides. */
 .about-skills { padding-inline: clamp(12px, 2vw, 28px); }
 .skills-grid { width: 100%; margin-inline: auto; }
+.skills-grid .skill-item { width: min(100%, 320px); justify-self: center; }
