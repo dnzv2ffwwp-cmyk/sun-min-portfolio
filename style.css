@@ -3511,3 +3511,12 @@ main,
 .about-skills { padding-inline: clamp(12px, 2vw, 28px); }
 .skills-grid { width: 100%; margin-inline: auto; }
 .skills-grid .skill-item { width: min(100%, 320px); justify-self: center; }
+
+/* Halve the space between Visual Works and Selected Projects. */
+#works { padding-bottom: clamp(50px, 6.5vw, 95px); }
+#works .gallery-section:last-child { padding-bottom: clamp(12px, 1.5vw, 22px); }
+#projects { padding-top: clamp(50px, 6.5vw, 95px); }
+@media (max-width: 620px) {
+  #works { padding-bottom: 27.5px; }
+  #projects { padding-top: 27.5px; }
+}

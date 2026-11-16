@@ -561,9 +561,42 @@
     window.addEventListener('resize', requestProjectFigmaUpdate, { passive: true });
   }
 
+  // Reveal project content in small blocks so long case studies unfold on scroll.
+  const projectRevealSelectors = [
+    '.project-detail__heading', '.project-process__intro', '.project-process__facts',
+    '.mellowee-direction__hero > *', '.mellowee-direction__meta',
+    '.mellowee-direction__section > :not(.mellowee-direction__screen-area)',
+    '.mellowee-direction__screen-area > *', '.mellowee-direction__closing',
+    '.mobbly-case__hero', '.mobbly-case__opening', '.mobbly-case__section > *',
+    '.mobbly-case__closing', '.project-process__preview-head',
+    '.project-process__stage', '.project-process__open', '.other-portfolio > *'
+  ];
+  document.querySelectorAll(projectRevealSelectors.map(selector => `#projects ${selector}`).join(', '))
+    .forEach(item => item.classList.add('reveal'));
+  document.querySelectorAll('#projects .project-process__facts, #projects .mellowee-direction__grid3, #projects .mellowee-direction__colors, #projects .mobbly-case__goal-grid, #projects .mobbly-case__screens').forEach(group => {
+    // Animate cards individually rather than hiding their shared container.
+    group.classList.remove('reveal');
+    [...group.children].forEach((item, index) => {
+      item.classList.add('reveal');
+      item.style.setProperty('--reveal-delay', `${Math.min(index, 3) * 100}ms`);
+    });
+  });
+
   const revealItems = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => {
+      // Stagger visible skill rows without delaying rows still below the viewport.
+      document.querySelectorAll('.skills-grid').forEach(grid => {
+        const columns = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+        const items = [...grid.children];
+        const visible = entries.filter(entry => entry.isIntersecting && entry.target.parentElement === grid);
+        const firstRow = Math.min(...visible.map(entry => Math.floor(items.indexOf(entry.target) / columns)));
+        visible.forEach(entry => {
+          const index = items.indexOf(entry.target);
+          const row = Math.floor(index / columns) - firstRow;
+          entry.target.style.setProperty('--reveal-delay', `${row * 360 + (index % columns) * 110}ms`);
+        });
+      });
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
         entry.target.classList.add('is-visible');
