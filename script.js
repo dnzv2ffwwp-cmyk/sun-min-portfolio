@@ -206,7 +206,7 @@
     track.prepend(...copies());
     track.append(...copies());
     const items = [...track.children];
-    if (carousel.closest('#popup, #poster')) {
+    if (carousel.closest('#banner, #popup, #poster')) {
       track.classList.add('is-continuous');
       let offset = 0;
       let lastTime = 0;
