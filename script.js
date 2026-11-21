@@ -229,7 +229,7 @@
         const elapsed = lastTime ? Math.min((now - lastTime) / 1000, .05) : 0;
         lastTime = now;
         if (inView && !held && !track.querySelector('a:focus-visible') && !document.hidden && !document.querySelector('dialog[open]')) {
-          if (!reducedMotion.matches) offset += 24 * elapsed;
+          if (!reducedMotion.matches && !track.querySelector('.asset-card--detail:hover')) offset += 24 * elapsed;
           if (manual) {
             const delta = Math.sign(manual) * Math.min(Math.abs(manual), Math.max(1, step() * 2.5 * elapsed));
             offset += delta;
@@ -258,7 +258,11 @@
       track.addEventListener('pointermove', event => {
         if (!held) return;
         const distance = event.clientX - originX;
-        if (Math.abs(distance) > 4) { didDrag = true; track.setPointerCapture(event.pointerId); }
+        if (!didDrag) {
+          if (Math.abs(distance) <= 4) return;
+          didDrag = true;
+          track.setPointerCapture(event.pointerId);
+        }
         offset = originOffset - distance;
         // Wrap by a full repeated set without changing the pointer's reference position.
         const before = offset;

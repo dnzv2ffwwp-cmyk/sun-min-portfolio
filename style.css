@@ -602,7 +602,7 @@ main,
   padding-inline: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
   }
 
-.projects>.section-heading {
+.projects > :is(.section-heading, .projects-archive) {
   max-width: calc(var(--max) - 2 * var(--gutter));
   margin-inline: auto;
 }
@@ -3339,6 +3339,7 @@ main,
   font-weight: 600;
   letter-spacing: .08em;
   opacity: 0;
+  pointer-events: none;
   transition: opacity .3s ease;
 }
 .detail-feature__direction { font-size: 1.2em; line-height: 1; }
@@ -3346,6 +3347,8 @@ main,
 .detail-feature:is(:hover, :focus-visible) .detail-feature__overlay,
 .asset-card--detail:is(:hover, :focus-visible) .detail-feature__overlay { opacity: 1; }
 .asset-card--detail figure { position: relative; }
+.asset-grid--wide .asset-card--detail figure { background: #13170d; }
+.asset-grid--wide .asset-card--detail img { object-fit: contain; }
 .asset-card--detail:focus-visible { outline: 2px solid var(--ink, #111); outline-offset: -2px; }
 @media (hover: none) {
   .asset-card--detail .detail-feature__overlay {
@@ -3442,6 +3445,7 @@ main,
 .projects-archive { --page-ink: #202020; --page-gutter: 0px; margin-top: clamp(24px, 3vw, 45px); }
 .projects-archive .project-detail { padding: clamp(32px, 4vw, 60px) 0; }
 .projects-archive .project-detail:first-child { padding-top: 12px; }
+.projects-archive .project-process--disclosure { max-width: none; }
 
 /* Reveal the next work at each viewport size. */
 @media (min-width: 621px) and (max-width: 1100px) {
