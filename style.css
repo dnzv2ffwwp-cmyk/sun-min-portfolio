@@ -1189,15 +1189,17 @@ main,
     gap: 8px;
     background: rgba(246, 246, 244, .98);
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
     transform: translateY(-15px);
-    transition: opacity .25s ease, transform .25s ease;
   }
 
   .navigation.is-open {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
     transform: translateY(0);
+    transition: opacity .25s ease, transform .25s ease;
   }
 
   .navigation a {
@@ -3341,7 +3343,20 @@ main,
 }
 .detail-feature__direction { font-size: 1.2em; line-height: 1; }
 .detail-slider .detail-feature:is(:hover, :focus-visible) .detail-feature__image > img { filter: blur(4px); opacity: .65; }
-.detail-feature:is(:hover, :focus-visible) .detail-feature__overlay { opacity: 1; }
+.detail-feature:is(:hover, :focus-visible) .detail-feature__overlay,
+.asset-card--detail:is(:hover, :focus-visible) .detail-feature__overlay { opacity: 1; }
+.asset-card--detail figure { position: relative; }
+.asset-card--detail:focus-visible { outline: 2px solid var(--ink, #111); outline-offset: -2px; }
+@media (hover: none) {
+  .asset-card--detail .detail-feature__overlay {
+    inset: auto 12px 12px auto;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgb(0 0 0 / 72%);
+    font-size: 14px;
+    opacity: 1;
+  }
+}
 .detail-slider .detail-feature__copy { padding: 24px; flex: 1; justify-content: flex-start; }
 .detail-slider .detail-feature__copy h3 { margin: 12px 0 16px; font-size: clamp(24px, 2.4vw, 36px); }
 .detail-slider .detail-feature__copy p { font-size: 14px; }
@@ -3489,9 +3504,13 @@ main,
   visibility: hidden;
   pointer-events: none;
   transform: translateY(-8px);
-  transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
 }
-.site-header.is-compact .navigation.is-open { opacity: 1; visibility: visible; transform: translateY(0); }
+.site-header.is-compact .navigation.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity .2s ease, transform .2s ease;
+}
 .site-header.is-compact .navigation a { padding: 16px; border: 0; border-radius: 12px; font-family: 'Pretendard', sans-serif; font-size: 18px; }
 .site-header.is-compact .menu-toggle:focus-visible { outline: 2px solid var(--point); outline-offset: 4px; }
 

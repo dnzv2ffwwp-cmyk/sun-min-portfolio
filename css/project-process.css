@@ -3,6 +3,53 @@
   margin: clamp(36px, 5vw, 72px) auto 0;
 }
 
+.project-process--disclosure { margin-top: 0; }
+.project-process__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-sizing: border-box;
+  min-height: 104px;
+  padding: 16px clamp(16px, 3vw, 36px);
+  border: 1px solid currentColor;
+  font-size: clamp(12px, 1.2vw, 16px);
+  list-style: none;
+  cursor: pointer;
+}
+.project-process__summary::-webkit-details-marker { display: none; }
+.project-process__summary::after {
+  content: '';
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.project-process__details[open] > .project-process__summary::after { transform: rotate(225deg); }
+.project-process__summary h2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px clamp(12px, 3vw, 32px);
+  margin: 0;
+  font-size: inherit;
+}
+.project-process__summary img {
+  width: auto;
+  max-width: min(42vw, 230px);
+  height: auto;
+  max-height: 70px;
+}
+.project-process__open.project-process__summary { margin-top: 16px; }
+.project-process__open.project-process__summary {
+  display: flex;
+  justify-content: flex-start;
+  gap: 6px;
+}
+.project-process__open.project-process__summary::after { content: none; }
+
 /* MELLOWEE case study — revised narrative */
 .mellowee-case__direction-grid,
 .mellowee-case__design-points {
@@ -302,6 +349,7 @@
   column-gap: clamp(32px, 6vw, 100px);
 }
 
+.project-process__intro[hidden] { display: none; }
 .project-process__intro .project-process__eyebrow { grid-column: 1 / -1; }
 .project-process__intro h3 {
   margin: 20px 0 0;
@@ -836,6 +884,7 @@
 .mobbly-case__kicker { color: var(--mobbly-blue); }
 .mobbly-case__opening h4 { margin: 20px 0; font-size: clamp(42px, 6.4vw, 86px); line-height: .98; letter-spacing: -.055em; }
 .mobbly-case__opening h4 em { color: var(--mobbly-blue); font-style: normal; }
+.mobbly-case__opening .mobbly-case__accent { color: var(--mobbly-yellow); }
 .mobbly-case__opening > p { max-width: 740px; margin: 0 auto; color: #5b5a54; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.85; }
 .mobbly-case__meta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 960px; margin: 58px auto 0; border-top: 1px solid #dedbcf; border-bottom: 1px solid #dedbcf; }
 .mobbly-case__meta div { padding: 24px 14px; }

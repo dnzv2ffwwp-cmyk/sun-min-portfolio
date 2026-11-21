@@ -2,6 +2,7 @@ document.querySelectorAll('[data-preview]').forEach(preview => {
   const stage = preview.querySelector('[data-preview-stage]');
   const canvas = preview.querySelector('[data-preview-canvas]');
   const frame = preview.querySelector('[data-preview-frame]');
+  const disclosure = preview.closest('details');
   const buttons = [...preview.querySelectorAll('[data-width]')];
   const canObserveStage = 'ResizeObserver' in window;
   let selected = buttons.find(button => button.getAttribute('aria-pressed') === 'true') || buttons[0];
@@ -14,6 +15,7 @@ document.querySelectorAll('[data-preview]').forEach(preview => {
   }
 
   function updatePreview() {
+    if (!stage.clientWidth) return;
     const width = Number(selected.dataset.width);
     const height = Number(selected.dataset.height);
     const device = selected.dataset.device;
@@ -57,6 +59,7 @@ document.querySelectorAll('[data-preview]').forEach(preview => {
   });
 
   if (canObserveStage) new ResizeObserver(updatePreview).observe(stage);
+  disclosure?.addEventListener('toggle', updatePreview);
   window.addEventListener('resize', () => syncPreviewToViewport(), { passive: true });
   syncPreviewToViewport(true);
 });

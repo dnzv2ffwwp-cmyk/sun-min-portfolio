@@ -228,7 +228,7 @@
       const tick = now => {
         const elapsed = lastTime ? Math.min((now - lastTime) / 1000, .05) : 0;
         lastTime = now;
-        if (inView && !held && !document.hidden && !document.querySelector('dialog[open]')) {
+        if (inView && !held && !track.querySelector('a:focus-visible') && !document.hidden && !document.querySelector('dialog[open]')) {
           if (!reducedMotion.matches) offset += 24 * elapsed;
           if (manual) {
             const delta = Math.sign(manual) * Math.min(Math.abs(manual), Math.max(1, step() * 2.5 * elapsed));

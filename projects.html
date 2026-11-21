@@ -31,9 +31,12 @@
     <div class="category-bar" data-sticky-nav><nav class="category-pills" aria-label="프로젝트 목록"><a href="#mellowee">01 Mellowee</a><a href="#mobbly">02 Mobbly</a></nav></div>
 
     <section class="project-detail" id="mellowee" aria-labelledby="mellowee-title">
-      <div class="project-detail__heading"><span>01</span><h2 id="mellowee-title">MELLOWEE</h2><p>아동복 쇼핑몰 웹사이트</p></div>
-      <div class="project-process">
-        <div class="project-process__intro">
+      <div class="project-process project-process--disclosure">
+        <details class="project-process__details">
+          <summary class="project-process__summary">
+            <h2 id="mellowee-title"><span>01</span><img src="./mellowee/img/logo/logo-main.svg" alt="MELLOWEE" /><span>아동복 쇼핑몰 웹사이트</span></h2>
+          </summary>
+        <div class="project-process__intro" hidden>
           <span class="project-process__eyebrow">RESPONSIVE DESIGN / 01</span>
           <!-- <h3>콘텐츠가 읽히는 순서에 맞춰<br/>화면을 다시 구성했습니다.</h3>
           <p>넓은 화면에서는 상품과 스토리를 나란히 보여주고,<br>
@@ -316,28 +319,32 @@
           </footer>
           </template>
         </section>
-        <div class="project-process__preview" data-preview>
-          <div class="project-process__preview-head">
-            <div><span class="project-process__eyebrow">LIVE PREVIEW</span><h4>화면 크기별로 보기</h4></div>
-            <div class="project-process__devices" role="group" aria-label="멜로위 화면 크기">
-              <button type="button" data-device="pc" data-width="1440" data-height="900" aria-pressed="true">PC</button>
-              <button type="button" data-device="tablet" data-width="768" data-height="1024" aria-pressed="false">태블릿</button>
-              <button type="button" data-device="mobile" data-width="390" data-height="844" aria-pressed="false">모바일</button>
+          <div class="project-process__preview" data-preview>
+            <div class="project-process__preview-head">
+              <div><span class="project-process__eyebrow">LIVE PREVIEW</span><h4>화면 크기별로 보기</h4></div>
+              <div class="project-process__devices" role="group" aria-label="멜로위 화면 크기">
+                <button type="button" data-device="pc" data-width="1440" data-height="900" aria-pressed="true">PC</button>
+                <button type="button" data-device="tablet" data-width="768" data-height="1024" aria-pressed="false">태블릿</button>
+                <button type="button" data-device="mobile" data-width="390" data-height="844" aria-pressed="false">모바일</button>
+              </div>
+            </div>
+            <div class="project-process__stage" data-preview-stage>
+              <div class="project-process__canvas" data-preview-canvas>
+                <iframe src="./mellowee/index.html" title="멜로위 반응형 웹사이트 미리보기" loading="lazy" data-preview-frame></iframe>
+              </div>
             </div>
           </div>
-          <div class="project-process__stage" data-preview-stage>
-            <div class="project-process__canvas" data-preview-canvas>
-              <iframe src="./mellowee/index.html" title="멜로위 반응형 웹사이트 미리보기" loading="lazy" data-preview-frame></iframe>
-            </div>
-          </div>
-          <a class="project-process__open" href="./mellowee/index.html" target="_blank" rel="noopener">멜로위 사이트 크게 보기 ↗</a>
-        </div>
+        </details>
+        <a class="project-process__open project-process__summary" href="./mellowee/index.html" target="_blank" rel="noopener">멜로위 사이트 크게 보기<span aria-hidden="true">↗</span></a>
       </div>
     </section>
 
     <section class="project-detail" id="mobbly" aria-labelledby="mobbly-title">
-      <div class="project-detail__heading"><span>02</span><h2 id="mobbly-title">MOBBLY</h2><p>키즈 가구 웹사이트</p></div>
-      <div class="project-process">
+      <div class="project-process project-process--disclosure">
+        <details class="project-process__details">
+          <summary class="project-process__summary">
+            <h2 id="mobbly-title"><span>02</span><img src="./assets/mobbly/img/logo/mobbly-logo-color.png" alt="MOBBLY" /><span>키즈 가구 웹사이트</span></h2>
+          </summary>
         <!-- 기존 모블리 소개 구성 보존
         <div class="project-process__intro">
           <span class="project-process__eyebrow">RESPONSIVE DESIGN / 02</span>
@@ -364,7 +371,7 @@
 
           <div class="mobbly-case__opening">
             <span class="mobbly-case__kicker">Project Overview</span>
-            <h4>Every day,<br /><em>made for kids.</em></h4>
+            <h4>Every day,<br /><em>made for <span class="mobbly-case__accent">kids.</span></em></h4>
             <p>따뜻한 원목 가구 이미지에 선명한 블루와 옐로 포인트를 더해 모블리만의 밝은 인상을 만들었습니다. 상품을 발견하고, 실제 사용 모습을 확인한 뒤, 구매 정보까지 자연스럽게 이어지도록 콘텐츠의 순서를 설계했습니다.</p>
             <dl class="mobbly-case__meta">
               <div><dt>Project</dt><dd>키즈 가구 쇼핑몰</dd></div>
@@ -469,8 +476,8 @@
             <img src="./assets/mobbly/img/product-detail/MOBBLY_Lumi_Bed_05_Low_Frame 1.jpg" alt="아이 눈높이에 맞춘 모블리 저상형 침대" loading="lazy" />
             <div><span>MOBBLY</span><strong>Gentle spaces<br />for growing dreams.</strong></div>
           </footer>
-
-          <div class="project-process__preview mobbly-case__preview" data-preview>
+        </section>
+          <div class="project-process__preview" data-preview>
             <div class="project-process__preview-head">
               <div><span class="project-process__eyebrow">LIVE PREVIEW</span><h4>화면 크기별로 보기</h4></div>
               <div class="project-process__devices" role="group" aria-label="모블리 화면 크기">
@@ -484,9 +491,9 @@
                 <iframe src="./assets/mobbly/index.html" title="모블리 반응형 웹사이트 미리보기" loading="lazy" data-preview-frame></iframe>
               </div>
             </div>
-            <a class="project-process__open" href="./assets/mobbly/index.html" target="_blank" rel="noopener">모블리 사이트 크게 보기 ↗</a>
           </div>
-        </section>
+        </details>
+        <a class="project-process__open project-process__summary" href="./assets/mobbly/index.html" target="_blank" rel="noopener">모블리 사이트 크게 보기<span aria-hidden="true">↗</span></a>
       </div>
     </section>
 
