@@ -5,7 +5,7 @@
   const close = dialog.querySelector('button');
   let previousOverflow = '';
   document.querySelector('.works-archive .gallery-section--banner')?.addEventListener('click', event => {
-    const card = event.target.closest('.asset-card');
+    const card = event.target.closest('a.asset-card:not(.asset-card--detail)');
     if (!card || event.defaultPrevented || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
     image.src = card.href;
