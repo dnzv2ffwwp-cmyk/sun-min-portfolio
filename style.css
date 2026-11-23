@@ -2345,11 +2345,6 @@ main,
     justify-content: flex-start;
   }
 
-  .asset-slider .asset-card,
-  .asset-slider--banner .asset-card {
-    flex-basis: calc((100% - var(--slider-gap)) / 1.15);
-  }
-
   .asset-slider__arrow {
     width: 40px;
     height: 40px;
@@ -3366,7 +3361,12 @@ main,
 .detail-slider .detail-feature__copy b { margin-top: auto; padding-top: 24px; }
 .detail-slider .detail-feature:focus-visible { outline: 2px solid var(--ink, #111); outline-offset: -2px; }
 @media (max-width: 620px) {
-  .detail-slider .detail-feature { flex-basis: calc((100% - var(--detail-gap)) / 1.15); }
+  .asset-slider .asset-card,
+  .detail-slider .detail-feature {
+    flex-basis: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .detail-slider *, .detail-slider *::before, .detail-slider *::after { transition: none; }
