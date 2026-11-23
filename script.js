@@ -185,6 +185,30 @@
     return { start, stop };
   };
 
+  const useNativeSwipe = window.matchMedia('(pointer: coarse)').matches;
+  const setupNativeSwipe = (track, cards, previous, next) => {
+    track.classList.add('is-native-swipe');
+
+    const move = direction => {
+      if (cards.length < 2) return;
+      const step = cards[1].getBoundingClientRect().left - cards[0].getBoundingClientRect().left;
+      const end = track.scrollWidth - track.clientWidth;
+      const position = Math.max(0, Math.min(track.scrollLeft, end));
+      let destination = position + direction * step;
+      if (direction < 0 && position <= 1) destination = end;
+      if (direction > 0 && position >= end - 1) destination = 0;
+      track.scrollTo({ left: destination, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+    };
+
+    previous.addEventListener('click', () => move(-1));
+    next.addEventListener('click', () => move(1));
+    track.addEventListener('keydown', event => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      move(event.key === 'ArrowRight' ? 1 : -1);
+    });
+  };
+
   document.querySelectorAll('[data-visual-carousel]').forEach(carousel => {
     const track = carousel.querySelector('[data-carousel-track]');
     const previous = carousel.querySelector('[data-carousel-prev]');
@@ -197,6 +221,10 @@
 
     const count = cards.length;
     if (!count) return;
+    if (useNativeSwipe) {
+      setupNativeSwipe(track, cards, previous, next);
+      return;
+    }
     const copies = () => cards.map(card => {
       const copy = card.cloneNode(true);
       copy.setAttribute('aria-hidden', 'true');
@@ -379,6 +407,10 @@
     const cards = [...track.children];
     const count = cards.length;
     if (!count) return;
+    if (useNativeSwipe) {
+      setupNativeSwipe(track, cards, slider.querySelector('[data-detail-prev]'), slider.querySelector('[data-detail-next]'));
+      return;
+    }
 
     // Keep enough trailing copies for a 3.5-card viewport to reach the loop boundary.
     const copyCards = () => cards.map(card => {

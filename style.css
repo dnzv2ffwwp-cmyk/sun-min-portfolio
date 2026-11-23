@@ -3529,6 +3529,12 @@ main,
 .detail-slider article.detail-feature:hover .detail-feature__image > img { filter: none; opacity: 1; transform: none; }
 
 .asset-slider .asset-grid.is-continuous { scroll-snap-type: none; scroll-behavior: auto; }
+.asset-slider .asset-grid.is-native-swipe,
+.detail-slider__track.is-native-swipe {
+  touch-action: pan-x pan-y pinch-zoom;
+  scroll-behavior: auto;
+  cursor: auto;
+}
 
 /* Keep the original skill layout with equal space on both sides. */
 .about-skills { padding-inline: clamp(12px, 2vw, 28px); }
